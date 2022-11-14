@@ -11,7 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $cod = trim($_POST['codBarra']);
     $nombre = trim($_POST['nombre']);
-    $categoriaOrden = trim($_POST['categoriaOrden']);
+    $imagen = $_FILES['imagen'];
+
+
+    // "<PRE>";
+    // var_dump($_FILES);
+    // "</PRE>";
+   
+    // exit;
+    //$categoriaOrden = trim($_POST['categoriaOrden']);
 
     // var_dump($categoriaOrden);
     // exit;
@@ -43,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $query = "SELECT * FROM pañol_herramientas WHERE codHerramienta = '${cod}'"; 
         $resultado = mysqli_query($conexion, $query);
 
-        var_dump($query);
+        //var_dump($query);
         
         if($resultado->num_rows){  
 
@@ -51,61 +59,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         }else{
 
+            if($imagen['type'] == 'image/png' || $imagen['type'] == 'image/jpeg'){
 
-            if ($categoriaOrden == 0 || $categoriaOrden == 'Otro' || $categoriaOrden == 'otro') {
-                if (isset($_POST['OtroCategoria'])) {
-        
-                    $OtroCategoria = trim($_POST['OtroCategoria']);
-        
-                    if (!empty($OtroCategoria)) {
-                        $OtroCategoria = str_replace("'", "\'", $OtroCategoria);
-        
-                        $buscarCategoria = buscarCategoria($OtroCategoria);
-        
-                        if($buscarCategoria == 0){
-        
-                            $queryOtroCategoria = "INSERT INTO categorias_herramienta(idCategoria,nomCategoria) VALUES (NULL,'" . $OtroCategoria . "')";
-        
-                            // echo $queryOtroServicio;
-            
-                            $resOtroCategoria = mysqli_query($conexion, $queryOtroCategoria);
-            
-                            $categoriaOrden = mysqli_insert_id($conexion);
-                        }else{
-                            $categoriaOrden = $buscarCategoria;
-                        }
-        
-                        
-                    } else {
-                    }
-                } else {
+                //CREA CARPETA 
+                $carpetaIMG = 'img/';
+    
+                if(!is_dir($carpetaIMG)){
+                    mkdir($carpetaIMG);
                 }
-            }
+    
+                //Generar un nombre único
+                $nomArchivo = md5( uniqid(rand(), true) ) . ".jpeg";
+    
+                //SUBIR PDF
+                //$carpeta = "/pdfSoliReserva"; 
+                move_uploaded_file($imagen['tmp_name'], $carpetaIMG . $nomArchivo);
+                
+    
+                $query = "INSERT INTO pañol_herramientas(imagen, codHerramienta, nomHerramienta, marcaHerramienta, modeloHerramienta, cantHerramienta ,descriptHerramienta, idDepartamento)";
+                $query .=  "VALUES('$nomArchivo','$cod', '$nombre',  '$marca', '$modelo', '$cantidad','$descripcion','$depa')";
+                $resultado = mysqli_query($conexion, $query);
 
-            //Query Insert tabla pañol_herramientas
-            $query = "INSERT INTO pañol_herramientas( codHerramienta, nomHerramienta, idCategoria, marcaHerramienta, modeloHerramienta, cantHerramienta ,descriptHerramienta, idDepartamento)";
-            $query .=  "VALUES('$cod', '$nombre', '$categoriaOrden', '$marca', '$modelo', '$cantidad','$descripcion','$depa')";
-            $resultado = mysqli_query($conexion, $query);
+                //Query Insert tabla pañol_herramientas_historial
+                $descripcionHis = "En la jornada " . date('Y/m/d') . " Se ingresaron " . $cantidad . " unidades de la herramienta: " . $nombre;
 
+                $query = "INSERT INTO pañol_herramientas_historial( imagen, codHerramienta, nomHerramienta,  marcaHerramienta, modeloHerramienta, cantHerramienta ,descriptHerramienta, idDepartamento)";
+                $query .=  "VALUES( '$nomArchivo','$cod', '$nombre',  '$marca', '$modelo', '$cantidad','$descripcionHis', '$depa')";
+                $res = mysqli_query($conexion, $query);
 
-            //Query Insert tabla pañol_herramientas_historial
-            $descripcionHis = "En la jornada " . date('Y/m/d') . " Se ingresaron " . $cantidad . " unidades de la herramienta: " . $nombre;
+                if($resultado){
 
-            $query = "INSERT INTO pañol_herramientas_historial( codHerramienta, nomHerramienta, idCategoria, marcaHerramienta, modeloHerramienta, cantHerramienta ,descriptHerramienta, idDepartamento)";
-            $query .=  "VALUES('$cod', '$nombre', '$categoriaOrden', '$marca', '$modelo', '$cantidad','$descripcionHis', '$depa')";
-            $res = mysqli_query($conexion, $query);
-
-
-            
-           
-
-            if($resultado){
-
-                header('Location: ../sdo-bodega-pañol/listado-herramientas.php?exitoCrearHerramienta=true');
+                    header('Location: ../sdo-bodega-pañol/listado-herramientas.php?exitoCrearHerramienta=true');
+    
+                }else{
+                    header('Location: ../sdo-bodega-pañol/bodega-administrar.php?exitoCrearHerramienta=false');
+                }
 
             }else{
-                header('Location: ../sdo-bodega-pañol/bodega-administrar.php?exitoCrearHerramienta=false');
+    
+                header('Location: ../sdo-bodega-pañol/bodega-administrar.php?solojpeg=true');
             }
+
+
+            // if ($categoriaOrden == 0 || $categoriaOrden == 'Otro' || $categoriaOrden == 'otro') {
+            //     if (isset($_POST['OtroCategoria'])) {
+        
+            //         $OtroCategoria = trim($_POST['OtroCategoria']);
+        
+            //         if (!empty($OtroCategoria)) {
+            //             $OtroCategoria = str_replace("'", "\'", $OtroCategoria);
+        
+            //             $buscarCategoria = buscarCategoria($OtroCategoria);
+        
+            //             if($buscarCategoria == 0){
+        
+            //                 $queryOtroCategoria = "INSERT INTO categorias_herramienta(idCategoria,nomCategoria) VALUES (NULL,'" . $OtroCategoria . "')";
+        
+            //                 // echo $queryOtroServicio;
+            
+            //                 $resOtroCategoria = mysqli_query($conexion, $queryOtroCategoria);
+            
+            //                 $categoriaOrden = mysqli_insert_id($conexion);
+            //             }else{
+            //                 $categoriaOrden = $buscarCategoria;
+            //             }
+        
+                        
+            //         } else {
+            //         }
+            //     } else {
+            //     }
+            // }
+
+       
+          
         }
 
         

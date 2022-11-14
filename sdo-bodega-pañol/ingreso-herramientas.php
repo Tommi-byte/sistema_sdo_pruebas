@@ -200,6 +200,7 @@ include '../sdo-funciones/funciones.php';
                                                     var btn = document.getElementById('valida');
 
                                                     input.disabled = true;
+                                                    input.style.cursor = "not-allowed"
                                                     btn.disabled = true;
 
                                                 </script>
@@ -227,13 +228,13 @@ include '../sdo-funciones/funciones.php';
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                                                             </div>
-                                                            <input type="text" required readonly style="text-transform:capitalize" class="form-control" value="<?php echo $buscarCodigo?>" id="codigoBarra" name="codBarra" placeholder="Código de barras de la herramienta" minlength="3" maxlength="12" onKeypress="return event.charCode>=48 && event.charCode <=57 || event.charCode <=13">
+                                                            <input type="text"  required readonly style="text-transform:capitalize;cursor:not-allowed" class="form-control" value="<?php echo $buscarCodigo?>" id="codigoBarra" name="codBarra" placeholder="Código de barras de la herramienta" minlength="3" maxlength="12" onKeypress="return event.charCode>=48 && event.charCode <=57 || event.charCode <=13">
                                                             </div>
                                                             
                                                     </div>
 
                                                     <div class="form-group col-md-6">
-                                                        <label for="exampleInputNomTarjeta">Nombre:<code>*</code></label>
+                                                        <label for="exampleInputNomTarjeta">Nombre Descriptivo:<code>*</code></label>
                                                         <div class="input-group mb-3">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-tools"></i></span>
@@ -246,30 +247,30 @@ include '../sdo-funciones/funciones.php';
                                                 <div class="form-row">
 
 
-                                                    <div class="form-group col-md-6">
+                                                    <!-- <div class="form-group col-md-6">
                                                         <label for="exampleInputNomTarjeta">Categoria:<code>*</code></label>
                                                         <div class="input-group mb-3">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-tools"></i></span>
-                                                            </div>
+                                                            </div> -->
                                                             <!-- <input type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="categoria" placeholder="Categoria de la herramienta"> -->
-                                                            <select id="categoriaOrden" required class="form-control" name="categoriaOrden">
+                                                            <!-- <select id="categoriaOrden" required class="form-control" name="categoriaOrden">
                                                                 <option value="" disabled selected>--Seleccione--</option>
                                                                 <?php
 
-                                                                $queryCategorias = "SELECT * FROM categorias_herramienta ORDER BY nomCategoria ASC";
+                                                                $queryCategorias //= "SELECT * FROM categorias_herramienta ORDER BY nomCategoria ASC";
 
-                                                                $resCategorias = mysqli_query($conexion, $queryCategorias);
+                                                                //$resCategorias = mysqli_query($conexion, $queryCategorias);
 
-                                                                while ($rowCategorias = $resCategorias->fetch_assoc()) {
+                                                                //while ($rowCategorias = $resCategorias->fetch_assoc()) {
 
                                                                 ?>
-                                                                    <option value="<?php echo $rowCategorias['idCategoria']; ?>">
-                                                                        <?php echo $rowCategorias['nomCategoria']; ?>
+                                                                    <option value="<?php //echo $rowCategorias['idCategoria']; ?>">
+                                                                        <?php //echo $rowCategorias['nomCategoria']; ?>
                                                                     </option>
                                                                 <?php
 
-                                                                }
+                                                                //}
 
 
                                                                 ?>
@@ -283,7 +284,7 @@ include '../sdo-funciones/funciones.php';
                                                     </div>
                                                     <div name="visualizarNomCategoria" id="visualizarNomCategoria" class="form-group col-md-6">
                                                         
-                                                    </div>
+                                                    </div> -->
 
                                                  
                                                 </div>
@@ -330,6 +331,15 @@ include '../sdo-funciones/funciones.php';
                                                                 
                                                                 ?>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="departamento">Imagen:</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-file-image"></i></span>
+                                                            </div>
+                                                            <input type="file" name="imagen" id="imagen" class="form-control" accept="image/png, image/jpeg">
                                                         </div>
                                                     </div>
 
@@ -393,7 +403,7 @@ include '../sdo-funciones/funciones.php';
                                                                 <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
                                                             </div>
                                                             
-                                                            <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
+                                                            <input disabled  type="text"   required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
                                                         </div>
                                                     </div>
                                                 </div>

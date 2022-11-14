@@ -208,13 +208,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         $cantidad = $row['cantHerramienta'];
                                                         if($cantidad >= 10){
 
-                                                            $color = "style=' background-color: #4BD30B; font-weight:bold;vertical-align:middle;'";
+                                                            $color = "style=' background-color: #4BD30B; font-weight:bold;vertical-align:middle;color:black;'";
                                         
                                                         }else if($cantidad <= 9 && $cantidad >= 3){
-                                                            $color = "style=' background-color: #DCE20E;font-weight:bold;vertical-align:middle;'";
+                                                            $color = "style=' background-color: #DCE20E;font-weight:bold;vertical-align:middle;color:black;'";
 
                                                         }else { 
-                                                            $color = "style=' background-color: #E05214;font-weight:bold;vertical-align:middle;'";
+                                                            $color = "style=' background-color: #E05214;font-weight:bold;vertical-align:middle;color:black;'";
                                                         }
                                                     ?>
                                                         <tr >
@@ -234,6 +234,9 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     <?php
 
                                                                     $idDepartamento = mb_strtoupper($row['idDepartamento']);
+                                                                    
+                                                                    $query
+
 
                                                                     // $queryDepa = "SELECT * FROM departamentos WHERE idDepartamento = ${idDepartamento}";
                                                                     // $resDepa = mysqli_close($conexion, $queryDepa);

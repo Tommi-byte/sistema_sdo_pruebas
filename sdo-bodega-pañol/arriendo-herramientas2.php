@@ -1,7 +1,8 @@
 <?php
 include '../sdo-funciones/conexion.php';
-
 include '../sdo-funciones/funciones.php';
+include 'carritoHerramientas.php';
+
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -40,7 +41,8 @@ date_default_timezone_set('America/Santiago');
         <script src="../sdo-funciones/jquery-3.2.1.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+        <!-- CSS only -->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
 
         <script type="text/javascript">
             $(document).ready(function() {
@@ -320,7 +322,7 @@ date_default_timezone_set('America/Santiago');
                                         
                                         </div>
 
-                                        <form action="guardar-arriendo-retiro.php" method="post" enctype="multipart/form-data">
+                                        
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
@@ -338,7 +340,7 @@ date_default_timezone_set('America/Santiago');
                                                         <span class="input-group-text"><i class="fas fa-building"></i></span>
                                                     </div>
 
-                                                    <select required name="departamentoSolicitante" id="departamentoSolicitante" class="form-control" onchange="cambiar()">
+                                                    <select required name="departamentoSolicitante" id="departamentoSolicitante" style="cursor:pointer;" class="form-control" onchange="cambiar()">
                                                         <option value="" disabled selected> -- Seleccione --</option>
                                                         <?php
 
@@ -429,7 +431,7 @@ date_default_timezone_set('America/Santiago');
                                                                 <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
                                                             </div>
                                                             
-                                                            <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
+                                                            <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed"" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,166 +440,154 @@ date_default_timezone_set('America/Santiago');
                                             </fieldset>
 
                                             
-    
+                                      
                                             
                         
                                         </div>
                                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                            
+                                           <br>
+                                            <div class="alert alert-primary" role="alert">
+                                                
+                                                <strong style="color: #62ed53;font-weight:bold">Herramienta Agregada:</strong><br>
+                                                <strong><?php echo $mensaje ?></strong> 
+                                            </div>
+                                            
 
-                                            <fieldset class="border p-3">
-                                                <legend class="w-auto">Herramientas Disponibles:</legend>
-                                                                    
-                                                <div class="table-responsive">
-                                                    <table style="font-size: 90%;" id="example2" class="table table-bordered table-hover">
-                                                        <thead class="bg-secondary">
-                                                        <tr>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>N°</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Imagen</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Código</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Nombre</center>  
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>En Stock</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Agregar</center> 
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                          
+                                              
+                                            <div class="row">
 
-                                                            <?php 
+                                                <?php 
+                                                
+                                                    $queryHerramientas = "SELECT * FROM pañol_herramientas";
+                                                    $resHerramienta = mysqli_query($conexion, $queryHerramientas);                
+                                                ?>
 
-                                                            $queryHerramientas = "SELECT * FROM pañol_herramientas ORDER BY idHerramienta  DESC";
-                                                            $resHerramientas = mysqli_query($conexion, $queryHerramientas);
+                                                <?php while($rowHerramienta = $resHerramienta->fetch_assoc()){
 
-                                                            while($rowHerramientas = $resHerramientas->fetch_assoc()){
 
-                                                                $datos = [];
+                                                    
+                                                    $datosHerramientas = [];
 
-                                                                $datos['idHerramienta'] = $rowHerramientas['idHerramienta'];
-                                                                $datos['codHerramienta'] = $rowHerramientas['codHerramienta'];
-                                                                $datos['nomHerramienta'] = $rowHerramientas['nomHerramienta'];
-                                                                $datos['cantHerramienta'] = $rowHerramientas['cantHerramienta'];
 
-                                                            
+                                                    $datosHerramientas['idHerramienta'] = $rowHerramienta['idHerramienta'];
+                                                    $datosHerramientas['codHerramienta'] = $rowHerramienta['codHerramienta'];
+                                                    $datosHerramientas['nomHerramienta'] = $rowHerramienta['nomHerramienta'];
+                                                    $datosHerramientas['imagen'] = $rowHerramienta['imagen'];
+                                                    $datosHerramientas['cantHerramienta'] = $rowHerramienta['cantHerramienta'];
+                                                    $datosHerramientas['descriptHerramienta'] = $rowHerramienta['descriptHerramienta'];
 
-                                                                ?>
+                                                    $idHerramienta = $datosHerramientas['idHerramienta'];
+                                                    $codHerramienta =  $datosHerramientas['codHerramienta'];
+                                                    $nomHerramienta =  $datosHerramientas['nomHerramienta'];
+                                                    $cantHerramienta =  $datosHerramientas['cantHerramienta'];
+                                                    $descriptHerramienta =  $datosHerramientas['descriptHerramienta'];
+
+
+                                                    if($cantHerramienta <= 2 ){
+
+                                                        $color = " style='color:red; font-weight:bold'";
+                                                    }
+
+                                                    if($cantHerramienta >=3 && $cantHerramienta <= 9){
+
+                                                        $color = " style='color:yellow; font-weight:bold'";
+                                                    }
+
+                                                    if($cantHerramienta >=10){
+
+                                                        $color = " style='color:#62ed53; font-weight:bold'";
+                                                    }
+
+                                                    $imagenHerramienta = $datosHerramientas['imagen'];
+                                                
+                                                ?>
+                                                
+                                                    <div class="col-lg-3 col-md-2">
+                                                        <div class="card " >
+                                                            <img
+                                                            height="300px"
+                                                            src="img/<?php echo  $imagenHerramienta  ?>" 
+                                                            title="<?php echo $nomHerramienta?>"
+                                                            class="card-img-top"                             
+                                                            alt="Imagen producto">
+                                                            <div class="card-body ">          
+                                                                <span style="text-align: center; color: orange; font-weight:bold;"><?php echo "Código. " . $codHerramienta?></span><br>
+                                                                <span style="text-transform:uppercase;font-weight:bold;color: yellowgreen"><?php echo $nomHerramienta ?></span><br>
+                                                                <h5  <?php echo $color?> class="card-title" style="font-weight: bold">En Stock: <?php echo $cantHerramienta; ?></h5>
+                                                                <br>
                                                                 
-                                                                <tr>
-                                                                    <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $idHerramienta = mb_strtoupper($rowHerramientas['idHerramienta']);
-                                                                            echo $idHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                    </td>
-                                                                    <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                                echo "<i class='fas fa-tools'></i>";
-
-                                                                            ?>
-                                                                        </center>
-                                                                    </td>
-                                                                    <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $codHerramienta = mb_strtoupper($rowHerramientas['codHerramienta']);
-                                                                            echo $codHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                    </td>
-                                                                    <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $nomHerramienta = mb_strtoupper($rowHerramientas['nomHerramienta']);
-                                                                            echo $nomHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                    </td>
-                                                                    <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold;" class="bg-primary">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $cantHerramienta = mb_strtoupper($rowHerramientas['cantHerramienta']);
-                                                                            echo $cantHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                    </td>
-                                                                    <td style="vertical-align: middle;font-weight:bold">
-                                                                    <center>
-                                                                        <?php 
-
-                                                                            ?>
+                                                    
+                                                                <br>
+                                                                <button type="button" style="cursor:zoom-in;" class="btn btn-xs  btn-info" id="descripcion" data-toggle="modal" data-target="#idHerramienta<?php echo $idHerramienta ?>">Leer Descripción</button> 
+                                                                <br>
+                                                                <div class="modal fade" id="idHerramienta<?php echo $idHerramienta ?>" name="idHerramienta<?php echo $idHerramienta ?>" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="EjemploModalLabel">Especificaciones de la herramienta</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">×</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div style="text-align:left;" class="form-group">
+                                                                                    
+                                                                                </div>
+                                                                                    <p><?php echo $descriptHerramienta;?></p>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
                                                                                 
-                                                                                <form action="añadir-herramientas.php" class="form-group" method="POST" id="eliminar" style="margin: 0;text-align:center;">
-                                                                            
-                                                                                    <input type="hidden" name="idHerramienta" value="<?php echo $idHerramienta ;?>">
-                                                                                    <button type="submit" onclick="confirmar(event, <?php echo $idHerramienta?>)" id="inputMozi" class="btn  btn-success"><i class="fas fa-plus"></i></button>
-                                                                                
-                                                                                </form>
 
-                                                                            <?php
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                                        
-                                                                        ?>
-                                                                    </center>
-                                                                    </td>
-                                                                </tr>
+                                                                <br>
 
-                                                                <?php
+                                                    
 
+                                                                <form action="" method="POST">
+                                                                    
+                                                                    <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
+                                                                    <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
+                                                                    <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
+                                                                   
 
+                                                                    <button name="btnAccion" value="Agregar" type="submit" class="btn btn-success">Añadir al carrito</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .col-3 -->
 
-                                                            }
+                                                <?php }?>
+                                              
+                                            </div> <!-- .row--> 
 
-
-                                                            ?>
-
-                                                        </tbody>
-                                                        <tfoot class="bg-secondary">
-                                                            <tr>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>N°</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Imagen</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Código</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Nombre</center>  
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>En Stock</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Agregar</center> 
-                                                                </th>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </fieldset>
-
+                                   
+                                            
+                                         
+                                            
+                                            <nav aria-label="...">
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item active">
+                                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item">
+                                                    <a class="page-link" href="#">Next</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                         
+                                                             
                                         </div>
                                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
@@ -765,7 +755,8 @@ date_default_timezone_set('America/Santiago');
 
                                         <br>
                                         
-                                        <div class="tab-pane fade" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                        <div class="tab-pane fade" id="pills-resumen"  role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                            
                                             
                                             <fieldset class="border p-3">
                                                 <legend class="w-auto">Resumen Solicitud:</legend>
@@ -777,12 +768,13 @@ date_default_timezone_set('America/Santiago');
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <label for="exampleInputNomTarjeta">Fecha Ingreso:</label>
+                                                            <a name="resumen"></a>
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
                                                                 </div>
                                                                 
-                                                                <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
+                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed"" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -797,7 +789,7 @@ date_default_timezone_set('America/Santiago');
                                                                     <span class="input-group-text"><i class="fas fa-building"></i></span>
                                                                 </div>
                                                                 
-                                                                <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="departamento" name="departamento" value="">
+                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="departamento" name="departamento" >
                                                             </div>
                                                         </div>
 
@@ -808,7 +800,7 @@ date_default_timezone_set('America/Santiago');
                                                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                                                 </div>
                                                                 
-                                                                <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="personal" name="personal" value="">
+                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="personal" name="personal" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -843,7 +835,7 @@ date_default_timezone_set('America/Santiago');
                                                     <a href="bodega-administrar.php" class="btn btn-block btn-warning" style="font-weight: bold;"> Volver </a>
                                                 </div> -->
                                     </div>
-                            </form>
+                            
 
                             <div class="form-row fieldGroupCopy" style="display: none;">
                                         <div class="form-group col-md-3">
@@ -946,6 +938,10 @@ date_default_timezone_set('America/Santiago');
         <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
         <!-- AdminLTE App -->
         <script src="../dist/js/adminlte.min.js"></script>
+
+        <!-- Popovers -->
+      
+        </script>
         <!-- Page specific script -->
         <script>
             $(function() {
