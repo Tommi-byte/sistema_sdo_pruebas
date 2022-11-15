@@ -160,7 +160,7 @@ include '../sdo-funciones/funciones.php';
                                 <div class="card-body">
 
 
-<h5><b>Herramientas</b></h5>
+<h5><b>Panel administración</b></h5>
 <br>
 <div class="row">
     <div class="col-lg-3 col-12">
@@ -189,6 +189,30 @@ include '../sdo-funciones/funciones.php';
     </div>
     <div class="col-lg-3 col-12">
         <!-- small box -->
+        <div class="small-box bg-info">
+
+            <div class="inner">
+
+                <h4>Administrar</h4>
+                <h4>Materiales</h4>
+                <br>
+            </div>
+
+            <div class="icon">
+                <i class="nav-icon fas fa-box-open"></i>
+
+            </div>
+
+
+            <a href="materiales-administrar.php" class="small-box-footer">Administrar <i class="fas fa-arrow-circle-right"></i></a>
+
+
+
+        </div>
+
+    </div>
+    <!-- <div class="col-lg-3 col-12">
+       
         <div class="small-box bg-secondary">
 
             <div class="inner">
@@ -211,7 +235,7 @@ include '../sdo-funciones/funciones.php';
 
         </div>
 
-    </div>
+    </div> -->
     <!-- <div class="col-lg-3 col-12">
         
         <div class="small-box bg-warning">
@@ -240,54 +264,36 @@ include '../sdo-funciones/funciones.php';
 
 <hr>
 <br>
-<h5><b> Materiales</b></h5>
+<h5><b> Arriendo Herramientas y/o Retiro de Materiales por ticket de trabajo</b></h5>
 <br>
 
 <div class="row">
 
-    <div class="col-lg-3 col-12">
-        <!-- small box -->
-        <div class="small-box bg-info">
+   
+  <div class="col-lg-3 col-12">
+       
+        <div class="small-box bg-secondary">
 
             <div class="inner">
 
-                <h4>Administrar</h4>
-                <h4>Materiales</h4>
+                <h4>Administrar </h4>
+                <h4>Arriendo y/o Retiro
+                </h4>
                 <br>
             </div>
 
             <div class="icon">
-                <i class="nav-icon fas fa-box-open"></i>
+                <i class="nav-icon fas fa-door-open"></i>
 
             </div>
 
 
-            <a href="materiales-administrar.php" class="small-box-footer">Administrar <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="arriendo-retiro-ticket.php" class="small-box-footer">Arrendar <i class="fas fa-arrow-circle-right"></i></a>
 
 
 
         </div>
 
-    </div>
-    <div class="col-lg-3 col-12">
-        <!-- small box -->
-        <div class="small-box bg-success">
-
-            <div class="inner">
-
-                <h4>Retiro</h4>
-                <h4>Materiales</h4>
-                <br>
-            </div>
-
-            <div class="icon">
-                <i class="nav-icon fas fa-boxes"></i>
-
-            </div>
-
-
-            <a href="../sdo-bodega-pañol/error404/error.php" class="small-box-footer">Retirar <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
     </div>
 </div>
 

@@ -318,7 +318,7 @@ date_default_timezone_set('America/Santiago');
                                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Materiales</a>
                                             
                                             
-                                                <a class="nav-link" id="pills-resumen-tab" data-toggle="pill" href="#pills-resumen" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Resumen </a>
+                                                <a class="nav-link" id="pills-resumen-tab" data-toggle="pill" href="#pills-resumen" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Resumen(<?php echo (empty($_SESSION['CARRITO'])) ? 0: count($_SESSION['CARRITO'])?>) </a>
                                         
                                         </div>
 
@@ -447,11 +447,13 @@ date_default_timezone_set('America/Santiago');
                                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                             
                                            <br>
-                                            <div class="alert alert-primary" role="alert">
-                                                
-                                                <strong style="color: #62ed53;font-weight:bold">Herramienta Agregada:</strong><br>
-                                                <strong><?php echo $mensaje ?></strong> 
-                                            </div>
+                                           <?php if(!empty($mensaje)):?>
+                                                <div class="alert alert-primary" role="alert">
+                                                    
+                                                    <strong style="color: #62ed53;font-weight:bold">Herramienta Añadida Al Carrito:</strong><br>
+                                                    <strong><?php echo $mensaje ?></strong> 
+                                                </div>
+                                            <?php endif; ?>
                                             
 
                                           
@@ -553,11 +555,13 @@ date_default_timezone_set('America/Santiago');
                                                                 <form action="" method="POST">
                                                                     
                                                                     <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
+                                                                    <input type="hidden" name="codigo" id="codigo" value="<?php echo $codHerramienta?>">
                                                                     <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
+                                                                    <input type="hidden" name="stock" id="stock" value="<?php echo $cantHerramienta ?>">
                                                                     <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
                                                                    
 
-                                                                    <button name="btnAccion" value="Agregar" type="submit" class="btn btn-success">Añadir al carrito</button>
+                                                                    <button name="btnAccion" value="Agregar" type="submit" class="btn btn-success"><strong>Añadir al carrito</strong> </button>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -700,9 +704,12 @@ date_default_timezone_set('America/Santiago');
                                                                                     ?>
                                                                                         
                                                                                         <form action="añadir-herramientas.php" class="form-group" method="POST" id="eliminar" style="margin: 0;text-align:center;">
-                                                                                    
+
+                                                                                            
                                                                                             <input type="hidden" name="idHerramienta" value="<?php echo $idHerramienta ;?>">
                                                                                             <button type="submit" onclick="confirmar(event, <?php echo $idHerramienta?>)" id="inputMozi" class="btn  btn-success"><i class="fas fa-plus"></i></button>
+
+                                                                                           
                                                                                         
                                                                                         </form>
 
@@ -759,7 +766,7 @@ date_default_timezone_set('America/Santiago');
                                             
                                             
                                             <fieldset class="border p-3">
-                                                <legend class="w-auto">Resumen Solicitud:</legend>
+                                                <legend class="w-auto">Solicitante:</legend>
                                                 
                                                 <br>
                             
@@ -804,11 +811,79 @@ date_default_timezone_set('America/Santiago');
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </fieldset>
 
-                                                <h5>Herramientas Seleccionadas:</h5>
+
+                                                <fieldset class="border p-3">
+                                                                                                                                                                                                                      <legend class="w-auto">Herramientas Añadidas:</legend>
+                                                    
+                                                    
+
+                                                    <?php  if(!empty($_SESSION['CARRITO'])){?>
+
+                                                    
+
+                                                    <table class="table">
+                                                        <thead class="thead-light">
+                                                            <tr>
+                                                                <th scope="col" class="text-center">N°</th>
+                                                                <th scope="col" class="text-center">CÓDIGO</th>
+                                                                <th scope="col" class="text-center">NOMBRE</th>
+                                                                <th scope="col" class="text-center">CANTIDAD</th>
+                                                                <th scope="col" class="text-center">ACCIONES</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <?php foreach($_SESSION['CARRITO'] AS $indice=>$herramienta){  
+                                                            
+                                                            if(!isset($num)){
+                                                                $num = 0;
+                                                            }else{
+                                                                $num = $num;
+                                                            }
+
+                                                            $num++;
+                                                            
+                                                        ?>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row"  class="text-center"><?php echo $num?></th>
+                                                                    <td class="text-center"><?php echo $herramienta['codigo']?></td>
+                                                                    <td class="text-center"><?php echo $herramienta['nombre']?></td>
+                                                                    <td class="text-center"><input type="number" name="cantidad" min="1" max="<?php echo $herramienta['stock']?>" class="form-control"></td>
+                                                                    
+                                                                    <form action="" method="POST">
+
+                                                                        
+                                                                            <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
+
+                                                                            <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
+                                                                        
+                                                                    </form>
+                                                                        
+                                                                    </tr>                                                          
+                                                            </tbody>
+
+
+                                                        <?php } ?>
+                                                        </table>
+
+                                                  
+                                                    </table>
+                                                    <?php }else{?>
+
+                                                        <div class="alert alert-info">
+
+                                                            <strong>No ha añadido ninguna herramienta</strong> 
+
+                                                        </div>
+
+                                                    <?php }?>
+
+                                                    
+                                                </fieldset>
                                                 
                                         
-                                            </fieldset>
+                                            
 
                                             <br>
                                             <br>

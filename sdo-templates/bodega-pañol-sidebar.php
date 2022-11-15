@@ -100,9 +100,9 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
 
                 <li class="nav-header"></li>
                 <li class="nav-item">
-                    <a href="../sdo-bodega-pañol/arriendo-retiro-ticket.php" class="nav-link">
+                    <a href="../sdo-bodega-pañol/error404/error.php" class="nav-link">
                         <i class="nav-icon fas fa-door-open"></i>
-                        <p>Administrar Arriendo Herramientas y/o Retiro Materiales Ticket Trabajo </p>
+                        <p>Arriendo Herramientas</p>
                     </a>
                 </li>
 
@@ -114,7 +114,13 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
                     </a>
                 </li>
 
-              
+                <li class="nav-header"></li>
+                <li class="nav-item">
+                    <a href="../sdo-bodega-pañol/error404/error.php" class="nav-link">
+                    <i class="nav-icon fas fa-boxes"></i>
+                        <p>Retiro Materiales</p>
+                    </a>
+                </li>
                 <li class="nav-header"></li>
                 <li class="nav-item">
                     <a href="../sdo-bodega-pañol/reserva-administrar.php" class="nav-link">
