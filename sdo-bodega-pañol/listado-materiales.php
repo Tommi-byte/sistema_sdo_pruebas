@@ -151,9 +151,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Material<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Categoria Material<center>
-                                                        </th>
+                                                      
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Material<center>
                                                         </th>
@@ -170,7 +168,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                             <center>Fecha Vencimiento<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Descripción Material <center>
+                                                            <center>Visualizar Descripción Material <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Modificar <center>
@@ -240,22 +238,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     ?>
                                                                 </center>
                                                             </td>
-                                                            <td nowrap="nowrap" style="vertical-align:middle; text-align:justify;">
-                                                                <center>
-                                                                <?php
-                                                                    $idCategoria = $row['idCategoria'];
-                                                                    $query = 'SELECT * FROM categorias_material WHERE idCategoria = "' . $idCategoria. '"';
-                                                                    $res1 = mysqli_query($conexion, $query);
-
-                                                                    while($rowCategorias = $res1->fetch_assoc()){
-
-                                                                        $nomCategoria = $rowCategorias['nomCategoria'];
-                                                                        echo $nomCategoria;
-                                                                    }
-                                                                   
-                                                                    ?>
-                                                                </center>
-                                                            </td>
+                                              
                                                             <td nowrap="nowrap" style="vertical-align:middle;">
                                                                 <center>
                                                                     <?php echo mb_strtoupper($row['marcaMaterial']); ?>
@@ -298,10 +281,43 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                 </center>
                                                             </td>                                 
                                                             <td style="vertical-align:middle; text-align:justify;">
-                                                                <center>
+                                                            <center>
                                                                     <?php
-                                                                    echo $row['descriptMaterial'];
+
+                                                                     $descriptMaterial = $row['descriptMaterial'];
+                                                                    
+                                                                     
                                                                     ?>
+
+                                                                  <!-- Button trigger modal -->
+                                                                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#idHerramienta">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </button>
+
+                                                                    <!-- Modal -->
+                                                                        <div class="modal fade" id="idHerramienta" name="idHerramienta" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="EjemploModalLabel">Especificaciones Del Material</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">×</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div style="text-align:left;" class="form-group">
+                                                                                        
+                                                                                    </div>
+                                                                                        <p><?php echo $descriptMaterial;?></p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
+                                                                                    
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </center>
                                                             </td>
                                                             <td style="vertical-align: middle;">
@@ -406,9 +422,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Material<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Categoria Material<center>
-                                                        </th>
+                                                     
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Material<center>
                                                         </th>
@@ -425,7 +439,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                             <center>Fecha Vencimiento<center>
                                                         </th>                                        
                                                         <th style="vertical-align:middle;">
-                                                            <center>Descripción Material<center>
+                                                            <center>Visualizar Descripción Material <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Modificar <center>

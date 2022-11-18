@@ -2,6 +2,7 @@
 
 include '../sdo-funciones/conexion.php';
 
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -20,23 +21,24 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Listado de Herramientas</title>
 
-    <link rel="icon" href="../dist/img/ss-vina-quillota.png" type="image/icon type">
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="../dist/css/modelo.css">
-    <link rel="stylesheet" href="css/estilos.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+        <!-- AdminLTE css -->
+        <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 
+        <script src="../dist/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="../dist/sweetalert2/dist/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="../dist/sweetalert2/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="css/estilos.css">
+
+        <script src="../sdo-funciones/jquery-3.2.1.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode" id="body">
@@ -159,15 +161,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Codigo Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Uso Departamento<center>
-                                                        </th>
+                                                       
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
+                                                        <!-- <th style="vertical-align:middle;">
                                                             <center>Categoria Herramienta<center>
-                                                        </th>
+                                                        </th> -->
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Herramienta<center>
                                                         </th>
@@ -178,11 +178,15 @@ if (session_status() == PHP_SESSION_NONE) {
                                                             <center>Cantidad <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
+                                                            <center>Visualizar Descripción Herramienta <center>
+                                                        </th>
+                                                        <th style="vertical-align:middle;">
                                                             <center>Fecha Ingreso<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Descripción Herramienta <center>
+                                                            <center>Uso Departamento<center>
                                                         </th>
+                                                       
                                                         <th style="vertical-align:middle;">
                                                             <center>Modificar <center>
                                                         </th>
@@ -202,7 +206,6 @@ if (session_status() == PHP_SESSION_NONE) {
                                                     $numHerramienta = 1;
 
                                                     while ($row = $res->fetch_assoc()) {
-
 
                                                         $color = "";
                                                         $cantidad = $row['cantHerramienta'];
@@ -229,25 +232,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     ?>
                                                                 </center>
                                                             </td>
-                                                            <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                <center>
-                                                                    <?php
-
-                                                                    $idDepartamento = mb_strtoupper($row['idDepartamento']);
-                                                                    
-                                                                    $query
-
-
-                                                                    // $queryDepa = "SELECT * FROM departamentos WHERE idDepartamento = ${idDepartamento}";
-                                                                    // $resDepa = mysqli_close($conexion, $queryDepa);
-
-                                                                    
-
-                                                                    
-
-                                                                    ?>
-                                                                </center>
-                                                            </td>
+                                                       
                                                             <td nowrap="nowrap" style="vertical-align:middle; text-align:justify;font-weight:bold">
                                                                 <center>
                                                                     <?php
@@ -255,22 +240,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     ?>
                                                                 </center>
                                                             </td>
-                                                            <td nowrap="nowrap" style="vertical-align:middle; text-align:justify;font-weight:bold">
-                                                                <center>
-                                                                    <?php
-                                                                    $idCategoria = $row['idCategoria'];
-                                                                    $query = 'SELECT * FROM categorias_herramienta WHERE idCategoria = "' . $idCategoria. '"';
-                                                                    $res1 = mysqli_query($conexion, $query);
-
-                                                                    while($rowCategorias = $res1->fetch_assoc()){
-
-                                                                        $nomCategoria = $rowCategorias['nomCategoria'];
-                                                                        echo $nomCategoria;
-                                                                    }
-                                                                   
-                                                                    ?>
-                                                                </center>
-                                                            </td>
+                                                          
                                                             <td  nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
                                                                 <center>
                                                                     <?php echo mb_strtoupper($row['marcaHerramienta']); ?>
@@ -304,17 +274,78 @@ if (session_status() == PHP_SESSION_NONE) {
                                                             <td style="vertical-align:middle; text-align:justify;font-weight:bold">
                                                                 <center>
                                                                     <?php
-                                                                    echo mb_strtoupper($row['fechaIngreso']);
+
+                                                                     $descriptHerramienta = $row['descriptHerramienta'];
+                                                                    
+                                                                     
                                                                     ?>
+
+                                                                  <!-- Button trigger modal -->
+                                                                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#idHerramienta">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </button>
+
+                                                                    <!-- Modal -->
+                                                                        <div class="modal fade" id="idHerramienta" name="idHerramienta" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="EjemploModalLabel">Especificaciones de la herramienta</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">×</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div style="text-align:left;" class="form-group">
+                                                                                        
+                                                                                    </div>
+                                                                                        <p><?php echo $descriptHerramienta;?></p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
+                                                                                    
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </center>
-                                                            </td>                                     
+                                                            </td>
                                                             <td style="vertical-align:middle; text-align:justify;font-weight:bold">
                                                                 <center>
                                                                     <?php
-                                                                    echo $row['descriptHerramienta'];
+                                                                    echo mb_strtoupper($row['fechaIngreso']);
                                                                     ?>
                                                                 </center>
                                                             </td>
+                                                            <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
+                                                                <center>
+                                                                    <?php
+
+                                                                    $idDepartamento = mb_strtoupper($row['idDepartamento']);                                                   
+                                        
+                                                                    $queryDepa = "SELECT * FROM departamentos WHERE idDepartamento = ${idDepartamento}";
+                                                                    $resDepa = mysqli_query($conexion, $queryDepa);
+
+                                                                    while($rowDepa = $resDepa->fetch_assoc()){
+
+                                                                        $datos = [];
+
+                                                                        $datos['nomDepartamento'] = $rowDepa['nomDepartamento'];
+
+                                                                        $nomDepartamento = $datos['nomDepartamento'];
+
+
+                                                                    }
+
+                                                                    echo mb_strtoupper($nomDepartamento);
+
+                                                                    
+
+                                                                    ?>
+                                                                </center>
+                                                            </td>                                     
+                                                     
                                                             <td style="vertical-align: middle;font-weight:bold">
                                                                 <center>
                                                                     <?php 
@@ -426,15 +457,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Codigo Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Uso Departamento<center>
-                                                        </th>
+                                                       
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
+                                                        <!-- <th style="vertical-align:middle;">
                                                             <center>Categoria Herramienta<center>
-                                                        </th>
+                                                        </th> -->
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Herramienta<center>
                                                         </th>
@@ -445,11 +474,15 @@ if (session_status() == PHP_SESSION_NONE) {
                                                             <center>Cantidad<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Fecha Ingreso<center>
-                                                        </th>                                           
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Descripción Herramienta<center>
+                                                            <center>Visualizar Descripción Herramienta <center>
                                                         </th>
+                                                        <th style="vertical-align:middle;">
+                                                            <center>Fecha Ingreso<center>
+                                                        </th>
+                                                        <th style="vertical-align:middle;">
+                                                            <center>Uso Departamento<center>
+                                                        </th>                                      
+                                                     
                                                         <th style="vertical-align:middle;">
                                                             <center>Modificar<center>
                                                         </th>

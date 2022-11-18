@@ -49,6 +49,7 @@ date_default_timezone_set('America/Santiago');
                 recargarSubDepartamento();
                 recargarNomDepartamento();
                 recargarListTecnicos();
+               
 
                 $('#departamentoSolicitante').change(function() {
                     recargarSubDepartamento();
@@ -58,6 +59,8 @@ date_default_timezone_set('America/Santiago');
                 $('#servicioOrden').change(function() {
                     recargarNomDepartamento();
                 });
+
+             
 
 
                 function recargarSubDepartamento() {
@@ -226,6 +229,9 @@ date_default_timezone_set('America/Santiago');
             }                                                        
 
         </script>
+         
+         
+        
     </head>
     <body class="hold-transition sidebar-mini dark-mode">
         
@@ -277,7 +283,117 @@ date_default_timezone_set('America/Santiago');
 
                 <?php 
                 
+                if(isset($_GET['sacar'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Error..',
+                            text: 'No puede ingresar 0 herramientas',
+                            
+                        })
+                        </script>
+                    <?php
                 
+                }
+
+                if(isset($_GET['stock'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Error..',
+                            text: 'La cantidad solicitada no puede superar el stock disponible',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
+
+                if(isset($_GET['eliminado'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Good..',
+                            text: 'Elemento eliminado de la lista',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
+
+                if(isset($_GET['repetido'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'warning',
+                            title: 'Ya existe..',
+                            text: 'Esta Herramienta ya se encuentra seleccionada en el carrito',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
+
+                if(isset($_GET['ingresado'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Añadido al carrito..',
+                            text: 'Herramienta añadida exitosamente',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
+
+                if(isset($_GET['guardado'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Exito.',
+                            text: 'Solicitud Generada Correctamente',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
+
+                if(isset($_GET['vacios'])){
+                    
+                    ?>
+
+                        <script>
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Error.',
+                            text: 'Debe Ingresar al menos una herramienta o material',
+                            
+                        })
+                        </script>
+                    <?php
+                
+                }
                 
                 
                 
@@ -303,16 +419,15 @@ date_default_timezone_set('America/Santiago');
                                     <!-- /.card-header -->
                                     <div class="card-body">
 
-                                        <a href="bodega-administrar.php" style="float: right;" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver Atras</a>
+                                        <a href="arriendo-retiro-administrar.php" style="float: right;" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver Atras</a>
                                         <br>
                                         <br>
 
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             
-                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="font-weight: 900;"> Solicitante</a>
                                             
                                             
-                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="font-weight: 900;">Herramientas</a>
+                                                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="font-weight: 900;">Herramientas</a>
                                            
                                             
                                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Materiales</a>
@@ -323,277 +438,152 @@ date_default_timezone_set('America/Santiago');
                                         </div>
 
                                         
-                                            <div class="tab-content" id="pills-tabContent">
-                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
-                                    
-                                            
-                                            <fieldset class="border p-3">
-                                                <legend class="w-auto">Información Personal:</legend>
-
-                                                <div class="form-row">
-                                                <div class="form-group col-md-6">
-
-                                                <label for="departamentoSolicitante">Departamento: <code>*</code></label>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                        <div class="tab-content" id="pills-tabContent">
+                                             
+                                            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                
+                                            <br>
+                                            <?php if(!empty($mensaje)):?>
+                                                    <div class="alert alert-primary" id="mensaje"   role="alert">
+                                                        
+                                                        <strong style="color: #62ed53;font-weight:bold">Herramienta Añadida Al Carrito:</strong><br>
+                                                        <strong><?php echo $mensaje ?></strong> 
                                                     </div>
+                                                <?php endif; ?>
+                                                
 
-                                                    <select required name="departamentoSolicitante" id="departamentoSolicitante" style="cursor:pointer;" class="form-control" onchange="cambiar()">
-                                                        <option value="" disabled selected> -- Seleccione --</option>
-                                                        <?php
+                                            
+                                                
+                                                <div class="row">
 
-                                                        $queryPersonal = "SELECT * FROM departamentos";
-                                                        $res = mysqli_query($conexion, $queryPersonal);
+                                                    <?php 
+                                                    
+                                                        $queryHerramientas = "SELECT * FROM pañol_herramientas";
+                                                        $resHerramienta = mysqli_query($conexion, $queryHerramientas);                
+                                                    ?>
 
-                                                        while ($row = $res->fetch_assoc()) {
-                                                            if ($row['idDepartamento'] == $idDepartamento) {
-                                                        ?>
-
-
-
-                                                                <option value="<?php echo   $row['idDepartamento']; ?>">
-                                                                    <?php echo $row['nomDepartamento']; ?>
-
-                                                                </option>
+                                                    <?php while($rowHerramienta = $resHerramienta->fetch_assoc()){
 
 
-                                                            <?php
-                                                            } else {
+                                                        
+                                                        $datosHerramientas = [];
 
-                                                            ?>
-                                                                <option value="<?php echo $row['idDepartamento'] ?>">
-                                                                    <?php echo $row['nomDepartamento'] ?>
-                                                                </option>
-                                                        <?php
-                                                            }
+
+                                                        $datosHerramientas['idHerramienta'] = $rowHerramienta['idHerramienta'];
+                                                        $datosHerramientas['codHerramienta'] = $rowHerramienta['codHerramienta'];
+                                                        $datosHerramientas['nomHerramienta'] = $rowHerramienta['nomHerramienta'];
+                                                        $datosHerramientas['imagen'] = $rowHerramienta['imagen'];
+                                                        $datosHerramientas['cantHerramienta'] = $rowHerramienta['cantHerramienta'];
+                                                        $datosHerramientas['descriptHerramienta'] = $rowHerramienta['descriptHerramienta'];
+
+                                                        $idHerramienta = $datosHerramientas['idHerramienta'];
+                                                        $codHerramienta =  $datosHerramientas['codHerramienta'];
+                                                        $nomHerramienta =  $datosHerramientas['nomHerramienta'];
+                                                        $cantHerramienta =  $datosHerramientas['cantHerramienta'];
+                                                        $descriptHerramienta =  $datosHerramientas['descriptHerramienta'];
+
+
+                                                        if($cantHerramienta <= 2 ){
+
+                                                            $color = " style='color:red; font-weight:bold'";
                                                         }
 
+                                                        if($cantHerramienta >=3 && $cantHerramienta <= 9){
 
-                                                        ?>
-                                                    </select>
-                                                    <!-- <input id="codigo" style="resize:none;" required name="codigo" class="form-control"  placeholder="Código Soli. Compra"> -->
+                                                            $color = " style='color:yellow; font-weight:bold'";
+                                                        }
 
-                                                    </div>
-                                                </div>
+                                                        if($cantHerramienta >=10){
 
-                                                    <div class="form-group col-md-6">
-                                                        <label >Personal Solicitante:<code>*</code></label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <!-- <span class="input-group-text"><i class="fas fa-user"></i></span> -->
-                                                            </div>
-                                                            <div style="width: 100%;" id="htmlSelect" name="htmlSelect"></div>
-                                                            <!-- <select name="personalSolicita" id="personal" name="personalSolicita" class="form-control">
-                                                                <option value="" selected>-- Seleccione --</option>
-                                                                <?php
+                                                            $color = " style='color:#62ed53; font-weight:bold'";
+                                                        }
 
-                                                                /*$queryPersonal = "SELECT * FROM jefes_tecnicos";
-
-                                                                    $res = mysqli_query($conexion, $queryPersonal);
-
-                                                                    while($row = $res->fetch_assoc()){
-
-                                                                        ?>
-
-                                                                            <option value="<?php echo $row['idJefe'];?>">
-                                                                                <?php  echo $row['nomJefe'] . ' - ' .$row['cargoJefe']; ?>
-                                                                                
-                                                                            </option>
-                                                                            
-
-                                                                        <?php 
-
-
-
-
-                                                                    }*/
-
-
-                                                                ?>    
-                                                            </select> -->
-
-                                                            <!-- <input  readonly id="codigo" style="resize:none;" required name="codigo" class="form-control"  placeholder="N° de reserva"> -->
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-row">
-                                                
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputNomTarjeta">Fecha Ingreso:<code>*</code></label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
-                                                            </div>
-                                                            
-                                                            <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed"" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-
-                                            </fieldset>
-
-                                            
-                                      
-                                            
-                        
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                            
-                                           <br>
-                                           <?php if(!empty($mensaje)):?>
-                                                <div class="alert alert-primary" role="alert">
+                                                        $imagenHerramienta = $datosHerramientas['imagen'];
                                                     
-                                                    <strong style="color: #62ed53;font-weight:bold">Herramienta Añadida Al Carrito:</strong><br>
-                                                    <strong><?php echo $mensaje ?></strong> 
-                                                </div>
-                                            <?php endif; ?>
-                                            
-
-                                          
-                                              
-                                            <div class="row">
-
-                                                <?php 
-                                                
-                                                    $queryHerramientas = "SELECT * FROM pañol_herramientas";
-                                                    $resHerramienta = mysqli_query($conexion, $queryHerramientas);                
-                                                ?>
-
-                                                <?php while($rowHerramienta = $resHerramienta->fetch_assoc()){
-
-
+                                                    ?>
                                                     
-                                                    $datosHerramientas = [];
-
-
-                                                    $datosHerramientas['idHerramienta'] = $rowHerramienta['idHerramienta'];
-                                                    $datosHerramientas['codHerramienta'] = $rowHerramienta['codHerramienta'];
-                                                    $datosHerramientas['nomHerramienta'] = $rowHerramienta['nomHerramienta'];
-                                                    $datosHerramientas['imagen'] = $rowHerramienta['imagen'];
-                                                    $datosHerramientas['cantHerramienta'] = $rowHerramienta['cantHerramienta'];
-                                                    $datosHerramientas['descriptHerramienta'] = $rowHerramienta['descriptHerramienta'];
-
-                                                    $idHerramienta = $datosHerramientas['idHerramienta'];
-                                                    $codHerramienta =  $datosHerramientas['codHerramienta'];
-                                                    $nomHerramienta =  $datosHerramientas['nomHerramienta'];
-                                                    $cantHerramienta =  $datosHerramientas['cantHerramienta'];
-                                                    $descriptHerramienta =  $datosHerramientas['descriptHerramienta'];
-
-
-                                                    if($cantHerramienta <= 2 ){
-
-                                                        $color = " style='color:red; font-weight:bold'";
-                                                    }
-
-                                                    if($cantHerramienta >=3 && $cantHerramienta <= 9){
-
-                                                        $color = " style='color:yellow; font-weight:bold'";
-                                                    }
-
-                                                    if($cantHerramienta >=10){
-
-                                                        $color = " style='color:#62ed53; font-weight:bold'";
-                                                    }
-
-                                                    $imagenHerramienta = $datosHerramientas['imagen'];
-                                                
-                                                ?>
-                                                
-                                                    <div class="col-lg-3 col-md-2">
-                                                        <div class="card " >
-                                                            <img
-                                                            height="300px"
-                                                            src="img/<?php echo  $imagenHerramienta  ?>" 
-                                                            title="<?php echo $nomHerramienta?>"
-                                                            class="card-img-top"                             
-                                                            alt="Imagen producto">
-                                                            <div class="card-body ">          
-                                                                <span style="text-align: center; color: orange; font-weight:bold;"><?php echo "Código. " . $codHerramienta?></span><br>
-                                                                <span style="text-transform:uppercase;font-weight:bold;color: yellowgreen"><?php echo $nomHerramienta ?></span><br>
-                                                                <h5  <?php echo $color?> class="card-title" style="font-weight: bold">En Stock: <?php echo $cantHerramienta; ?></h5>
-                                                                <br>
-                                                                
-                                                    
-                                                                <br>
-                                                                <button type="button" style="cursor:zoom-in;" class="btn btn-xs  btn-info" id="descripcion" data-toggle="modal" data-target="#idHerramienta<?php echo $idHerramienta ?>">Leer Descripción</button> 
-                                                                <br>
-                                                                <div class="modal fade" id="idHerramienta<?php echo $idHerramienta ?>" name="idHerramienta<?php echo $idHerramienta ?>" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="EjemploModalLabel">Especificaciones de la herramienta</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">×</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div style="text-align:left;" class="form-group">
-                                                                                    
+                                                        <div class="col-lg-3 col-md-2">
+                                                            <div class="card " >
+                                                                <img
+                                                                height="300px"
+                                                                src="img/<?php echo  $imagenHerramienta  ?>" 
+                                                                title="<?php echo $nomHerramienta?>"
+                                                                class="card-img-top"                             
+                                                                alt="Imagen producto">
+                                                                <div class="card-body ">          
+                                                                    <span style="text-align: center; color: orange; font-weight:bold;"><?php echo "Código. " . $codHerramienta?></span><br>
+                                                                    <span style="text-transform:uppercase;font-weight:bold;color: yellowgreen"><?php echo $nomHerramienta ?></span><br>
+                                                                    <h5  <?php echo $color?> class="card-title" style="font-weight: bold">En Stock: <?php echo $cantHerramienta; ?></h5>
+                                                                    <br>
+                                                                    
+                                                        
+                                                                    <br>
+                                                                    <button type="button" style="cursor:zoom-in;" class="btn btn-xs  btn-info" id="descripcion" data-toggle="modal" data-target="#idHerramienta<?php echo $idHerramienta ?>">Leer Descripción</button> 
+                                                                    <br>
+                                                                    <div class="modal fade" id="idHerramienta<?php echo $idHerramienta ?>" name="idHerramienta<?php echo $idHerramienta ?>" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="EjemploModalLabel">Especificaciones de la herramienta</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">×</span>
+                                                                                    </button>
                                                                                 </div>
-                                                                                    <p><?php echo $descriptHerramienta;?></p>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
-                                                                                
+                                                                                <div class="modal-body">
+                                                                                    <div style="text-align:left;" class="form-group">
+                                                                                        
+                                                                                    </div>
+                                                                                        <p><?php echo $descriptHerramienta;?></p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
+                                                                                    
 
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <br>
-
-                                                    
-
-                                                                <form action="" method="POST">
+                                                                    <br>
                                                                     
-                                                                    <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
-                                                                    <input type="hidden" name="codigo" id="codigo" value="<?php echo $codHerramienta?>">
-                                                                    <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
-                                                                    <input type="hidden" name="stock" id="stock" value="<?php echo $cantHerramienta ?>">
-                                                                    <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
-                                                                   
+                                                                
 
-                                                                    <button name="btnAccion" value="Agregar" type="submit" class="btn btn-success"><strong>Añadir al carrito</strong> </button>
-                                                                </form>
+                                                        
+                                                                    
+                                                                        <form method="POST" id="formdata">
+                                                                            
+                                                                            <div class="form-group">
+                                                                                <label for="" class="label-control" required>Cantidad a reservar:</label>
+                                                                                <input type="number" class=" form-control" name="sacar">
+                                                                            </div>
+                                                                            
+                                                                            <br>
+                                                                            <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
+                                                                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $codHerramienta?>">
+                                                                            <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
+                                                                            <input type="hidden" name="stock" id="stock" value="<?php echo $cantHerramienta ?>">
+                                                                            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
+                                                                        
+
+                                                                            <button name="btnAccion" value="Agregar"  id="añadir"  class="btn btn-success"><strong>Añadir al carrito</strong> </button>
+                                                                        </form>
+                                                                    
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- .col-3 -->
+                                                        </div><!-- .col-3 -->
 
-                                                <?php }?>
-                                              
-                                            </div> <!-- .row--> 
+                                                    <?php }?>
+                                                
+                                                </div> <!-- .row--> 
 
-                                   
+                                    
+                                                
                                             
-                                         
+
                                             
-                                            <nav aria-label="...">
-                                                <ul class="pagination justify-content-center">
-                                                    <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item active">
-                                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                    <a class="page-link" href="#">Next</a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                         
-                                                             
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                                
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
                                             <fieldset class="border p-3">
                                                 <legend class="w-auto">Materiales Disponibles:</legend>
@@ -612,13 +602,14 @@ date_default_timezone_set('America/Santiago');
                                                                     <center>Código</center> 
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
-                                                                    <center>Nombre</center>  
+                                                                    <center>Nombre Descriptivo</center>  
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
                                                                     <center>Stock Disponible</center> 
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
-                                                                    <center>Agregar</center> 
+                                                                    <center>Agregar al Carrito</center> 
+                                                                   
                                                                 </th>
                                                             </tr>
                                                         </thead>
@@ -640,6 +631,25 @@ date_default_timezone_set('America/Santiago');
                                                                     $datos['codMaterial'] = $rowMateriales['codMaterial'];
                                                                     $datos['nomMaterial'] = $rowMateriales['nomMaterial'];
                                                                     $datos['cantMaterial'] = $rowMateriales['cantMaterial'];
+                                                                    $datos['imagen'] = $rowMateriales['imagen'];
+
+                                                                    $cantMaterial = $datos['cantMaterial'];
+
+                                                                    if($cantMaterial <= 2 ){
+
+                                                                        $color = " style='background-color:red; font-weight:bold;font-size: 30px; vertical-align:middle'";
+                                                                    }
+            
+                                                                    if($cantMaterial >=3 && $cantMaterial <= 9){
+            
+                                                                        $color = " style='background-color:yellow; font-weight:bold; vertical-align:middle'";
+                                                                    }
+            
+                                                                    if($cantMaterial >=10){
+            
+                                                                        $color = " style='background-color:#62ed53;font-size: 30px; font-weight:bold; vertical-align:middle'";
+                                                                    }
+            
 
 
 
@@ -662,7 +672,12 @@ date_default_timezone_set('America/Santiago');
                                                                                 <?php
 
                                                                               
-                                                                                echo '<i class="fas fa-box"></i> ';
+                                                                                $imagen = $rowMateriales['imagen'];
+                                                                                ?>
+                                                                                    
+                                                                                    <img src="img/<?php echo $imagen ?>" alt="Imagen del material" width="100px">
+
+                                                                                <?php 
 
                                                                                 ?>
                                                                             </center>
@@ -687,7 +702,7 @@ date_default_timezone_set('America/Santiago');
                                                                             ?>
                                                                         </center>
                                                                         </td>
-                                                                        <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold" class="bg-primary">
+                                                                        <td nowrap="nowrap" <?php echo $color ?> style="vertical-align:middle;font-weight:bold">
                                                                         <center>
                                                                             <?php
 
@@ -703,7 +718,7 @@ date_default_timezone_set('America/Santiago');
 
                                                                                     ?>
                                                                                         
-                                                                                        <form action="añadir-herramientas.php" class="form-group" method="POST" id="eliminar" style="margin: 0;text-align:center;">
+                                                                                        <form action="carritoMateriales.php" class="form-group" method="POST" >
 
                                                                                             
                                                                                             <input type="hidden" name="idHerramienta" value="<?php echo $idHerramienta ;?>">
@@ -743,13 +758,13 @@ date_default_timezone_set('America/Santiago');
                                                                     <center>Código</center> 
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
-                                                                    <center>Nombre</center>  
+                                                                    <center>Nombre Descriptivo</center>  
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
                                                                     <center>Stock Disponible</center> 
                                                                 </th>
                                                                 <th style="vertical-align: middle;">
-                                                                    <center>Agregar</center> 
+                                                                    <center>Agregar al Carrito</center> 
                                                                 </th>
                                                             </tr>
                                                         </tfoot>
@@ -757,153 +772,287 @@ date_default_timezone_set('America/Santiago');
                                                 </div>
                                             </fieldset>
 
-
-                                        </div>
-
-                                        <br>
-                                        
-                                        <div class="tab-pane fade" id="pills-resumen"  role="tabpanel" aria-labelledby="pills-resumen-tab">
-                                            
-                                            
-                                            <fieldset class="border p-3">
-                                                <legend class="w-auto">Solicitante:</legend>
-                                                
-                                                <br>
-                            
-                                                <h5>Información General Solicitud:</h5>
-
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="exampleInputNomTarjeta">Fecha Ingreso:</label>
-                                                            <a name="resumen"></a>
-                                                            <div class="input-group mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
-                                                                </div>
-                                                                
-                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed"" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                
-                                                    <div class="form-row">
-                                                        
-                                                        <div class="form-group col-md-6">
-                                                            <label for="exampleInputNomTarjeta">Departamento:</label>
-                                                            <div class="input-group mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="fas fa-building"></i></span>
-                                                                </div>
-                                                                
-                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="departamento" name="departamento" >
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group col-md-6">
-                                                            <label for="exampleInputNomTarjeta">Personal Solicitante:</label>
-                                                            <div class="input-group mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                                                </div>
-                                                                
-                                                                <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="personal" name="personal" value="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-
-
-                                                <fieldset class="border p-3">
-                                                                                                                                                                                                                      <legend class="w-auto">Herramientas Añadidas:</legend>
-                                                    
-                                                    
-
-                                                    <?php  if(!empty($_SESSION['CARRITO'])){?>
-
-                                                    
-
-                                                    <table class="table">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th scope="col" class="text-center">N°</th>
-                                                                <th scope="col" class="text-center">CÓDIGO</th>
-                                                                <th scope="col" class="text-center">NOMBRE</th>
-                                                                <th scope="col" class="text-center">CANTIDAD</th>
-                                                                <th scope="col" class="text-center">ACCIONES</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <?php foreach($_SESSION['CARRITO'] AS $indice=>$herramienta){  
-                                                            
-                                                            if(!isset($num)){
-                                                                $num = 0;
-                                                            }else{
-                                                                $num = $num;
-                                                            }
-
-                                                            $num++;
-                                                            
-                                                        ?>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row"  class="text-center"><?php echo $num?></th>
-                                                                    <td class="text-center"><?php echo $herramienta['codigo']?></td>
-                                                                    <td class="text-center"><?php echo $herramienta['nombre']?></td>
-                                                                    <td class="text-center"><input type="number" name="cantidad" min="1" max="<?php echo $herramienta['stock']?>" class="form-control"></td>
-                                                                    
-                                                                    <form action="" method="POST">
-
-                                                                        
-                                                                            <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
-
-                                                                            <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
-                                                                        
-                                                                    </form>
-                                                                        
-                                                                    </tr>                                                          
-                                                            </tbody>
-
-
-                                                        <?php } ?>
-                                                        </table>
-
-                                                  
-                                                    </table>
-                                                    <?php }else{?>
-
-                                                        <div class="alert alert-info">
-
-                                                            <strong>No ha añadido ninguna herramienta</strong> 
-
-                                                        </div>
-
-                                                    <?php }?>
-
-                                                    
-                                                </fieldset>
-                                                
-                                        
-                                            
-
-                                            <br>
-                                            <br>
-
-
-                                            <div class="form-group">
-                                                <input type="hidden" name="idTecnico" id="idTecnico" value="<?php echo $idUsuario; ?>">
-                                                <input type="hidden" id="nomTecnicoTurno" name="nomTecnicoTurno" value="<?php echo $nomUsuario; ?>" />
-                                                <input type="submit" class="btn btn-block btn-success" value="Guardar" style="font-weight: bold;" />
                                             </div>
-
-                                        </div>
+                                            <div class="tab-pane fade" id="pills-resumen"  role="tabpanel" aria-labelledby="pills-resumen-tab">
                                                 
-                                                <div class="form-group">
+                                                
+                                                <fieldset class="border p-3">
+                                                    <legend class="w-auto">Solicitante:</legend>
                                                     
-                                                    <!-- <input type="button" id="anterior" value="&laquo;Anterior" class="btn btn-primary"></input> -->
-                                                    <input type="button" id="siguiente" value="Siguiente&raquo;" class="btn btn-primary"></input>
+                                                    <br>
+                                
+                                                    <h5>Información General Solicitud:</h5>
+
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="exampleInputNomTarjeta">Fecha Ingreso:</label>
+                                                                <a name="resumen"></a>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
+                                                                    </div>
+                                                                    
+                                                                    <input disabled  type="text" required style="text-transform:capitalize;cursor:not-allowed" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    
+                                                       
+                                                        <div class="form-row fieldGroup">
+
+
+                                                            <div class="form-group col-md-3">
+
+                                                                <label for="departamentoSolicitante">Departamento: <code>*</code></label>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                                                    </div>
+
+                                                                    <select required name="departamentoSolicitante" id="departamentoSolicitante" class="form-control">
+                                                                        <option value="" disabled selected> -- Seleccione --</option>
+                                                                        <?php
+
+                                                                        $queryPersonal = "SELECT * FROM departamentos";
+                                                                        $res = mysqli_query($conexion, $queryPersonal);
+
+                                                                        while ($row = $res->fetch_assoc()) {
+                                                                            if ($row['idDepartamento'] == $idDepartamento) {
+                                                                        ?>
+
+
+
+                                                                                <option value="<?php echo   $row['idDepartamento']; ?>">
+                                                                                    <?php echo $row['nomDepartamento']; ?>
+
+                                                                                </option>
+
+
+                                                                            <?php
+                                                                            } else {
+
+                                                                            ?>
+                                                                                <option value="<?php echo $row['idDepartamento'] ?>">
+                                                                                    <?php echo $row['nomDepartamento'] ?>
+                                                                                </option>
+                                                                        <?php
+                                                                            }
+                                                                        }
+
+
+                                                                        ?>
+                                                                    </select>
+                                                                    <!-- <input id="codigo" style="resize:none;" required name="codigo" class="form-control"  placeholder="Código Soli. Compra"> -->
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group col-md-6">
+                                                                <label >Personal Solicitante:<code>*</code></label>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <!-- <span class="input-group-text"><i class="fas fa-user"></i></span> -->
+                                                                    </div>
+                                                                    <div style="width: 100%;" id="htmlSelect" name="htmlSelect"></div>
+                                                                    <!-- <select name="personalSolicita" id="personal" name="personalSolicita" class="form-control">
+                                                                        <option value="" selected>-- Seleccione --</option>
+                                                                        <?php
+
+                                                                        /*$queryPersonal = "SELECT * FROM jefes_tecnicos";
+
+                                                                            $res = mysqli_query($conexion, $queryPersonal);
+
+                                                                            while($row = $res->fetch_assoc()){
+
+                                                                                ?>
+
+                                                                                    <option value="<?php echo $row['idJefe'];?>">
+                                                                                        <?php  echo $row['nomJefe'] . ' - ' .$row['cargoJefe']; ?>
+                                                                                        
+                                                                                    </option>
+                                                                                    
+
+                                                                                <?php 
+
+
+
+
+                                                                            }*/
+
+
+                                                                        ?>    
+                                                                    </select> -->
+
+                                                                    <!-- <input  readonly id="codigo" style="resize:none;" required name="codigo" class="form-control"  placeholder="N° de reserva"> -->
+
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+
+                                                    <fieldset class="border p-3">
+                                                        <legend class="w-auto">Herramientas Añadidas:</legend>
+                                                        
+                                                        
+
+                                                        <?php  if(!empty($_SESSION['CARRITO'])){?>
+
+                                                        
+
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th scope="col" class="text-center">N°</th>
+                                                                    <th scope="col" class="text-center">CÓDIGO</th>
+                                                                    <th scope="col" class="text-center">NOMBRE</th>
+                                                                    <th scope="col" class="text-center">CANTIDAD</th>
+                                                                    <th scope="col" class="text-center">ACCIONES</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <?php foreach($_SESSION['CARRITO'] AS $indice=>$herramienta){  
+                                                                
+                                                                if(!isset($num)){
+                                                                    $num = 0;
+                                                                }else{
+                                                                    $num = $num;
+                                                                }
+
+                                                                $num++;
+                                                                
+                                                            ?>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"  class="text-center"><?php echo $num?></th>
+                                                                        <td class="text-center"><?php echo $herramienta['codigo']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['nombre']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['sacar']?></td>
+                                                                        
+                                                                        <form action="" method="POST">
+
+                                                                            
+                                                                                <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
+
+                                                                                <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
+                                                                            
+                                                                        </form>
+                                                                            
+                                                                        </tr>                                                          
+                                                                </tbody>
+
+
+                                                            <?php } ?>
+                                                            </table>
 
                                                     
-                                                </div>
+                                                        </table>
+                                                        <?php }else{?>
+
+                                                            <div class="alert alert-info">
+
+                                                                <strong>No ha añadido ninguna herramienta</strong> 
+
+                                                            </div>
+
+                                                        <?php }?>
+
+                                                        
+                                                    </fieldset>
+
+                                                    <fieldset class="border p-3">
+                                                        <legend class="w-auto">Materiales Añadidas:</legend>
+                                                        
+                                                        
+
+                                                        <?php  if(!empty($_SESSION['CARRITO'])){?>
+
+                                                        
+
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th scope="col" class="text-center">N°</th>
+                                                                    <th scope="col" class="text-center">CÓDIGO</th>
+                                                                    <th scope="col" class="text-center">NOMBRE</th>
+                                                                    <th scope="col" class="text-center">CANTIDAD</th>
+                                                                    <th scope="col" class="text-center">ACCIONES</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <?php foreach($_SESSION['CARRITO'] AS $indice=>$herramienta){  
+                                                                
+                                                                if(!isset($num)){
+                                                                    $num = 0;
+                                                                }else{
+                                                                    $num = $num;
+                                                                }
+
+                                                                $num++;
+                                                                
+                                                            ?>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"  class="text-center"><?php echo $num?></th>
+                                                                        <td class="text-center"><?php echo $herramienta['codigo']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['nombre']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['sacar']?></td>
+                                                                        
+                                                                        <form action="" method="POST">
+
+                                                                            
+                                                                                <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
+
+                                                                                <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
+                                                                            
+                                                                        </form>
+                                                                            
+                                                                        </tr>                                                          
+                                                                </tbody>
+
+
+                                                            <?php } ?>
+                                                            </table>
+
+                                                    
+                                                        </table>
+                                                        <?php }else{?>
+
+                                                            <div class="alert alert-info">
+
+                                                                <strong>No ha añadido ningún material</strong> 
+
+                                                            </div>
+
+                                                        <?php }?>
+
+                                                        
+                                                    </fieldset>
+                                                    
+                                            
+                                                
+
+                                                <br>
+                                                <br>
+
+                                                <form action="carritoHerramientas.php" method="POST">
+                                                    <div class="form-group">
+                                                        
+                                                        <input type="submit" class="btn btn-block btn-success" name="btnAccion" value="Guardar" style="font-weight: bold;" />
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <br>
+                                                    
+                                                    <div class="form-group">
+                                                        
+                                                        <!-- <input type="button" id="anterior" value="&laquo;Anterior" class="btn btn-primary"></input> -->
+                                                        <input type="button" id="siguiente" value="Siguiente&raquo;" class="btn btn-primary"></input>
+
+                                                        
+                                                    </div>
                                     
                                     
                                                 <!-- <div class="form-group">
@@ -1014,7 +1163,7 @@ date_default_timezone_set('America/Santiago');
         <!-- AdminLTE App -->
         <script src="../dist/js/adminlte.min.js"></script>
 
-        <!-- Popovers -->
+       
       
         </script>
         <!-- Page specific script -->
@@ -1080,10 +1229,13 @@ date_default_timezone_set('America/Santiago');
 
             
         </script>
-        
+    
+
+
    
-        </script>
+        
         <script src="js/alert.js"></script>
+        <script src="js/fetch_api_arriendo.js"></script>
     </body>
 
 </html>

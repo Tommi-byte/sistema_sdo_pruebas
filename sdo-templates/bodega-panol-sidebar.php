@@ -100,7 +100,7 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
 
                 <li class="nav-header"></li>
                 <li class="nav-item">
-                    <a href="../sdo-bodega-pañol/arriendo-retiro-ticket.php" class="nav-link">
+                    <a href="../sdo-bodega-pañol/arriendo-retiro-administrar.php" class="nav-link">
                         <i class="nav-icon fas fa-door-open"></i>
                         <p>Administrar Arriendo Herramientas y/o Retiro Materiales Ticket Trabajo </p>
                     </a>
@@ -173,7 +173,7 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
    
 
         <footer>
-            <p id="patito1" style="text-align:center; color: white; font-weight: bold"> Version: 0.2.1<br> Cueck!</p>           
+            <p id="patito1" style="text-align:center; color: white; font-weight: bold"> Version: 0.2.2<br> Cueck!</p>           
         </footer>
     </div>
     <!-- /.sidebar -->
@@ -184,7 +184,7 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
 
         patito.addEventListener('click', function(){
             Swal.fire({
-                title: 'Cueck Cueck patito bailando... Version 0.2.1',
+                title: 'Cueck Cueck patito bailando... Version 0.2.2',
                 width: 400,
                 padding: '3em',
                 color: '#716add',

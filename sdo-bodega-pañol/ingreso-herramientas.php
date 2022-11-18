@@ -348,6 +348,16 @@ include '../sdo-funciones/funciones.php';
 
                                                 <div class="form-row">
 
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputCodigoTarjeta">Marca:</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-tag"></i></i></span>
+                                                            </div>
+                                                            <input type="text"  class="form-control" id="numTelefono" name="marca" placeholder="Marca Herramienta">
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="form-group col-md-6">
                                                         <label for="exampleInputNomTarjeta">Modelo:</label>
@@ -360,17 +370,7 @@ include '../sdo-funciones/funciones.php';
                                                         </div>
                                                     </div>
 
-                                                 
-
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputCodigoTarjeta">Marca:</label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fas fa-tag"></i></i></span>
-                                                            </div>
-                                                            <input type="text"  class="form-control" id="numTelefono" name="marca" placeholder="Marca Herramienta">
-                                                        </div>
-                                                    </div>
+                                      
                                                 </div>
 
                                                 <div class="form-row">

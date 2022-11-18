@@ -43,17 +43,17 @@ if($res->num_rows){
     $idHerramienta = $datos['idHerramienta'];
 
 
-    $query1 = "SELECT * FROM  categorias_herramienta WHERE idCategoria = ${idCategoria}";
-    $res1 = mysqli_query($conexion, $query1);
-    $row1 = $res1->fetch_assoc();
-    mysqli_close($conexion);
-    if($row){
+    // $query1 = "SELECT * FROM  categorias_herramienta WHERE idCategoria = ${idCategoria}";
+    // $res1 = mysqli_query($conexion, $query1);
+    // $row1 = $res1->fetch_assoc();
+    // mysqli_close($conexion);
+    // if($row){
 
-        $datos1 = array();
-        $datos1['nomCategoria'] = $row1['nomCategoria']; 
-    }
+    //     $datos1 = array();
+    //     $datos1['nomCategoria'] = $row1['nomCategoria']; 
+    // }
 
-    $nomCategoria = $datos1['nomCategoria'];
+    // $nomCategoria = $datos1['nomCategoria'];
 
 
 
@@ -106,7 +106,7 @@ if($res->num_rows){
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini dark-mode">
     
     <div class="wrapper">
         
@@ -127,6 +127,26 @@ if($res->num_rows){
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
                             </ol>
+                            <br>
+                            <br>
+                            <div class="form-group">
+                                        <div style="float: right;" class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch3" onclick="toggleDark()">
+                                            <label class="custom-control-label" for="customSwitch3">Modo Claro</label>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function toggleDark() {
+                                            // var element = document.getElementById("navBarPrincipal")
+                                            // element.classList.toggle("dark-mode")
+
+                                            document.body.classList.toggle("dark-mode");
+                                            
+                                        }
+                                    </script>
+                                    <br>
+                                    <br>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -212,28 +232,6 @@ if($res->num_rows){
                                             </div>
 
                                             <div class="form-row">
-
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="exampleInputNomTarjeta">Categoria:<code></code></label>
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fas fa-list"></i></span>
-                                                        </div>
-                                                       <!-- <select class="form-control" name="calidadContractual" id="calidadContractual">
-                                                            <option value="Seleccione">Seleccione...</option>
-                                                            <option value="Contrata">Contrata</option>
-                                                            <option value="Empresa Externa">Empresa Externa</option>
-                                                            <option value="Honorarios">Honorarios</option>
-                                                            <option value="Reemplazo">Reemplazo</option>
-                                                            <option value="Titular">Titular</option>
-                                                        </select> -->
-                                                        
-                                                        <input type="text" required style="text-transform:capitalize" class="form-control" id="categoriaHerramienta" name="categoriaHerramienta" value="<?php echo $nomCategoria?>" readonly>
-                                                        <input type="hidden" value="<?php echo $idCategoria?>" name="idCategoria">
-
-                                                    </div>
-                                                </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="exampleInputCodigoTarjeta">Modelo:<code></code></label>

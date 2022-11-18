@@ -118,6 +118,15 @@ if (session_status() == PHP_SESSION_NONE) {
 
                                     }
 
+                                    if(isset($_GET['solojpeg'])){
+
+
+                                        echo '<div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h5><i class="fa fa-check"></i>&nbsp;Solo se permiten imagenes JPEG o PNG.</h5></div>';
+
+                                    }
+
                                   
 
                                         

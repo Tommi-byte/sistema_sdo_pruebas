@@ -198,7 +198,7 @@ include '../sdo-funciones/funciones.php';
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                                                             </div>
-                                                            <input type="text" required readonly style="text-transform:capitalize" class="form-control" id="codigoBarra"  minlength="3" maxlength="12" value="<?php echo $buscarCodigo?>" name="codBarra" placeholder="Código de barras del material" value="">
+                                                            <input type="text" required readonly style="text-transform:capitalize; cursor: not-allowed" class="form-control" id="codigoBarra"  minlength="3" maxlength="12" value="<?php echo $buscarCodigo?>" name="codBarra" placeholder="Código de barras del material" value="">
                                                         </div>
                                                     </div>
 
@@ -215,47 +215,19 @@ include '../sdo-funciones/funciones.php';
 
                                                 <div class="form-row">
 
-
                                                     <div class="form-group col-md-6">
-                                                        <label for="exampleInputNomTarjeta">Categoria:<code>*</code></label>
+                                                        <label for="exampleInputFile">Imagen:<code>*</code></label>
                                                         <div class="input-group mb-3">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fas fa-tools"></i></span>
+                                                                <span class="input-group-text"><i class="far fa-file-image"></i></span>
                                                             </div>
-                                                            <!-- <input type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="categoria" placeholder="Categoria del Material"> -->
-                                                            <select id="categoriaOrden" class="form-control" required name="categoriaOrden">
-                                                                <option value="" disabled selected>--Seleccione--</option>
-                                                                <?php
-
-                                                                $queryCategorias = "SELECT * FROM categorias_material ORDER BY nomCategoria ASC";
-
-                                                                $resCategorias = mysqli_query($conexion, $queryCategorias);
-
-                                                                while ($rowCategorias = $resCategorias->fetch_assoc()) {
-
-                                                                ?>
-                                                                    <option value="<?php echo $rowCategorias['idCategoria']; ?>">
-                                                                        <?php echo $rowCategorias['nomCategoria']; ?>
-                                                                    </option>
-                                                                <?php
-
-                                                                }
-
-
-                                                                ?>
-                                                                <option value="Otro">
-                                                                    Otro
-                                                                </option>
-                                                            </select>
+                                                            <input type="file" accept="image/jpeg, image/png" required class="form-control" id="imagen" name="imagen">
                                                         </div>
                                                     </div>
 
-                                                    <div name="visualizarNomCategoria" id="visualizarNomCategoria" class="form-group col-md-6">
-                                                        
-                                                    </div>
-
-                                                   
                                                 </div>
+
+                                            
 
                                                 <div class="form-row">
 
@@ -292,7 +264,7 @@ include '../sdo-funciones/funciones.php';
                                                                 <span class="input-group-text"><i class="far fa-calendar-times"></i></span>
                                                             </div>
                                                             
-                                                            <input disabled  type="text" required style="text-transform:capitalize" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
+                                                            <input disabled  type="text" required style="text-transform:capitalize; cursor: not-allowed" class="form-control" id="rutTarjeta" name="ingreso" value="<?php echo date('Y/m/d'); ?>">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-md-6">

@@ -116,9 +116,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Categoria Herramienta<center>
-                                                        </th>
+                                                       
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Herramienta<center>
                                                         </th>
@@ -170,22 +168,8 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     ?>
                                                                 </center>
                                                             </td>
-                                                            <td nowrap="nowrap" style="vertical-align:middle; text-align:justify;">
-                                                                <center>
-                                                                <?php
-                                                                    $idCategoria = $row['idCategoria'];
-                                                                    $query = 'SELECT * FROM categorias_herramienta WHERE idCategoria = "' . $idCategoria. '"';
-                                                                    $res1 = mysqli_query($conexion, $query);
-
-                                                                    while($rowCategorias = $res1->fetch_assoc()){
-
-                                                                        $nomCategoria = $rowCategorias['nomCategoria'];
-                                                                        echo $nomCategoria;
-                                                                    }
-                                                                   
-                                                                    ?>
-                                                                </center>
-                                                            </td>
+                                                            
+                                                       
                                                             <td nowrap="nowrap" style="vertical-align:middle;">
                                                                 <center>
                                                                     <?php echo mb_strtoupper($row['marcaHerramienta']); ?>
@@ -262,9 +246,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                         <th style="vertical-align:middle;">
                                                             <center>Nombre Herramienta<center>
                                                         </th>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Categoria Herramienta<center>
-                                                        </th>
+                                                      
                                                         <th style="vertical-align:middle;">
                                                             <center>Marca Herramienta<center>
                                                         </th>

@@ -44,7 +44,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h4>Men&uacute; del Sistema Bodega Pañol</h4>
-                            <h5>Administrar Herramientas</h5>
+                            <h5>Administrar Solicitudes Arriendo Herramientas o Retiro Materiales</h5>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -90,7 +90,10 @@ if (session_status() == PHP_SESSION_NONE) {
                                 </div>
 
                                 
+                                
                                 <?php 
+
+                                    //ALERTAS
                                             
                                     if(isset($_GET['exitoCrearHerramienta'])){
 
@@ -141,11 +144,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
                                         <div class="col-lg-6 col-12">
                                             <!-- small box -->
-                                            <div class="small-box bg-primary">
+                                            <div class="small-box bg-secondary">
 
                                                 <div class="inner">
 
-                                                    <h4>Añadir Herramienta</h4>
+                                                    <h4>Ingresar Solicitud</h4>
                                                     <h5>
                                                         
                                                     </h5>
@@ -160,7 +163,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 </div>
 
 
-                                                <a href="ingreso-herramientas.php" class="small-box-footer">Añadir <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a href="arriendo-retiro-ticket.php" class="small-box-footer">Ingresar <i class="fas fa-arrow-circle-right"></i></a>
 
 
 
@@ -173,7 +176,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
                                                 <div class="inner">
 
-                                                    <h4>Listado de herramientas</h4>
+                                                    <h4>Listado de solicitudes</h4>
                                                    
                                                     <br>
                                                 </div>
@@ -192,39 +195,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        
-                                        <div class="col-lg-6 col-12">
-                                                <!-- small box -->
-                                                <div class="small-box bg-info">
-
-                                                    <div class="inner">
-
-                                                        
-                                                        <h4>
-                                                            Visualizar Historial Ingresos
-                                                        </h4>
-                                                        <br>
-                                                    </div>
-
-
-
-                                                    <div class="icon">
-                                                    <i class="nav-icon fas fa-file-archive"></i>
-
-                                                    </div>
-
-
-                                                    <a href="historial-herramientas.php" class="small-box-footer">Visualizar <i class="fas fa-arrow-circle-right"></i></a>
-
-
-
-                                                </div>
-
-                                        </div>
-
-                                       
-                                    </div>
+                                   
                                  
 
                                     <!-- /.card-body -->
