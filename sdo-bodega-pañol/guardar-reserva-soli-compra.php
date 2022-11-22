@@ -108,15 +108,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
 
         if ($idSoliReserva < 10) {
-            $solicitudReferente = "000" . $idSoliReserva;
-        } else if ($idSoliReserva > 9 && $idSoliReserva < 100) {
+            $solicitudReferente = "000" . $idSoli;
+        } else if ($idSoli > 9 && $idSoli < 100) {
             $solicitudReferente = "00" . $idSoliReserva;
-        } else if ($idSoliReserva > 99 && $idSoliReserva < 1000) {
+        } else if ($idSoli > 99 && $idSoli < 1000) {
             $solicitudReferente = "0" . $idSoliReserva;
-        } else if ($idSoliReserva > 999) {
-            $solicitudReferente = $idSoliReserva;
+        } else if ($idSoli > 999) {
+            $solicitudReferente = $idSoli;
         } else {
-            $solicitudReferente = $idSoliReserva;
+            $solicitudReferente = $idSoli;
         }
 
         $numeroRes = "NR-" . $solicitudReferente ;

@@ -187,7 +187,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 </div>
 
 
-                                                <a href="listado-herramientas.php" class="small-box-footer">Listar <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a href="listado-soli-ticket.php" class="small-box-footer">Listar <i class="fas fa-arrow-circle-right"></i></a>
 
 
 

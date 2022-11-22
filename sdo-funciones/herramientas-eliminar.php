@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     
         if($resultado){
-            header('Location: listado-herramientas.php?eliminado=true');
+            header('Location: ../sdo-bodega-pañol/listado-herramientas.php?eliminado=true');
         }else{
-            header('Location: bodega-administrar.php?eliminado=false');
+            header('Location: ../sdo-bodega-pañol/bodega-administrar.php?eliminado=false');
         }
         
 

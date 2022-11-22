@@ -38,6 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $cantidad = trim($_POST['cantidad']);
     $descripcion = trim($_POST['descripcion']);
+
+
+    if(empty($descripcion)){
+
+        $descripcion = "SIN INFORMACIÓN";
+    }
     $depa = trim($_POST['departamento']);
 
 

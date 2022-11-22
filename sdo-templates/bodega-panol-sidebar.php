@@ -173,7 +173,7 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
    
 
         <footer>
-            <p id="patito1" style="text-align:center; color: white; font-weight: bold"> Version: 0.2.2<br> Cueck!</p>           
+            <p id="patito1" style="text-align:center; color: white; font-weight: bold"> Version: 0.2.8 Dev<br> Cueck!</p>           
         </footer>
     </div>
     <!-- /.sidebar -->
@@ -184,7 +184,7 @@ if (isset($_SESSION['nomUsuario']) && $_SESSION['userUsuario'] && $_SESSION['idU
 
         patito.addEventListener('click', function(){
             Swal.fire({
-                title: 'Cueck Cueck patito bailando... Version 0.2.2',
+                title: 'Cueck Cueck patito bailando... Version 0.2.8 Dev',
                 width: 400,
                 padding: '3em',
                 color: '#716add',

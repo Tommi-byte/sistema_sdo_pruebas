@@ -127,19 +127,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <br>
                                     <?php
 
-                                        if(isset($_GET['exitoCrearHerramienta'])){
 
-                                            echo '<div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="fa fa-check"></i>&nbsp;Herramienta Guardada Correctamente.</h5></div>';
-
-                                        }
 
                                         if(isset($_GET['eliminado'])){
 
-                                            echo '<div class="alert alert-danger alert-dismissible">
+                                            echo '<div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="fa fa-x"></i>&nbsp;Registro de la herramienta Eliminada.</h5></div>';
+                                            <h5><i class="fa fa-check"></i>&nbsp;Solicitud Eliminada.</h5></div>';
     
                                         }
 
@@ -159,26 +153,26 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 <thead class="bg-secondary">
                                                     <tr>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Codigo Herramienta<center>
+                                                            <center>Codigo Barras<center>
                                                         </th>
                                                        
                                                         <th style="vertical-align:middle;">
-                                                            <center>Nombre Herramienta<center>
+                                                            <center>Nombre Descriptivo<center>
                                                         </th>
                                                         <!-- <th style="vertical-align:middle;">
                                                             <center>Categoria Herramienta<center>
                                                         </th> -->
                                                         <th style="vertical-align:middle;">
-                                                            <center>Marca Herramienta<center>
+                                                            <center>Marca<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Modelo Herramienta<center>
+                                                            <center>Modelo<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Cantidad <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Visualizar Descripción Herramienta <center>
+                                                            <center>Descripción<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Fecha Ingreso<center>
@@ -382,7 +376,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     <?php 
                                                                     } else{
                                                                         ?>
-                                                                        <form action="herramientas-eliminar.php" class="form-group" method="POST" id="eliminar" style="margin: 0;text-align:center;" class="">
+                                                                        <form action="../sdo-funciones/herramientas-eliminar.php" class="form-group" method="POST" id="eliminar" style="margin: 0;text-align:center;" class="">
                                                                     
                                                                             <input type="hidden" name="idHerramienta" value="<?php echo $idHerramienta ;?>">
                                                                             <button type="submit" onclick="confirmar(event, <?php echo $idHerramienta?>)" id="inputMozi" class="btn btn-block btn-danger"><i class="fas fa-trash"></i></button>
@@ -454,40 +448,41 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 </tbody>
                                                 <tfoot class="bg-secondary">
                                                     <tr>
-                                                        <th style="vertical-align:middle;">
-                                                            <center>Codigo Herramienta<center>
+                                                    <th style="vertical-align:middle;">
+                                                            <center>Codigo Barras<center>
                                                         </th>
                                                        
                                                         <th style="vertical-align:middle;">
-                                                            <center>Nombre Herramienta<center>
+                                                            <center>Nombre Descriptivo<center>
                                                         </th>
                                                         <!-- <th style="vertical-align:middle;">
                                                             <center>Categoria Herramienta<center>
                                                         </th> -->
                                                         <th style="vertical-align:middle;">
-                                                            <center>Marca Herramienta<center>
+                                                            <center>Marca<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Modelo Herramienta<center>
+                                                            <center>Modelo<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Cantidad<center>
+                                                            <center>Cantidad <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Visualizar Descripción Herramienta <center>
+                                                            <center>Descripción<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Fecha Ingreso<center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
                                                             <center>Uso Departamento<center>
-                                                        </th>                                      
-                                                     
+                                                        </th>
+                                                       
                                                         <th style="vertical-align:middle;">
-                                                            <center>Modificar<center>
+                                                            <center>Modificar <center>
                                                         </th>
                                                         <th style="vertical-align:middle;">
-                                                            <center>Eliminar<center>
+                                                            <center>Eliminar <center>
+                                                        </th>
                                                         </th>
                                                      
                                                     </tr>

@@ -213,7 +213,7 @@ include '../sdo-funciones/funciones.php';
 
 
 
-                                        <form action="guardar-herramienta.php" method="post" enctype="multipart/form-data">
+                                        <form action="../sdo-funciones/guardar-herramienta.php" method="post" enctype="multipart/form-data">
                                         
                                             <fieldset class="border p-3">
                                                 <legend class="w-auto">Informaci&oacute;n General de la herramienta:</legend>
@@ -292,7 +292,7 @@ include '../sdo-funciones/funciones.php';
                                                 <div class="form-row">
 
                                                     <div class="form-group col-md-6">
-                                                        <label for="departamento">Departamento(Especialidad):</label>
+                                                        <label for="departamento">Uso Departamento:</label>
                                                         <div class="input-group mb-3">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-building"></i></span>
@@ -416,7 +416,7 @@ include '../sdo-funciones/funciones.php';
                                                 <legend class="w-auto">Informaci&oacute;n Especifica del producto</legend>
 
                                                     <div class="form-group col-md-12">
-                                                        <label for="descripcion">Especificaciones de la herramienta<code>*</code></label>
+                                                        <label for="descripcion">Especificaciones de la herramienta</label>
                                                         <div class="input-group mb-3">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-list"></i></span>

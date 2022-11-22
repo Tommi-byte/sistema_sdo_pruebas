@@ -217,10 +217,10 @@ date_default_timezone_set('America/Santiago');
                 var departamentoSolicitante = document.getElementById('departamentoSolicitante');
                 var nomTecnicoRecepcionador = document.getElementById('nomTecnicoRecepcionador');
 
-                var selected = departamentoSolicitante.options[departamentoSolicitante.selectedIndex].value;
-                var selected1 = nomTecnicoRecepcionador.options[nomTecnicoRecepcionador.selectedIndex].value;
+                var selected = departamentoSolicitante.options[departamentoSolicitante.selectedIndex].text;
+                var selected1 = nomTecnicoRecepcionador.options[nomTecnicoRecepcionador.selectedIndex].text;
 
-                var departamento = document.getElementById('depa');
+                var departamento = document.getElementById('departamento');
                 departamento.value = selected;
 
                 var personal = document.getElementById('personal');
@@ -280,7 +280,7 @@ date_default_timezone_set('America/Santiago');
                 </section>
 
                 <!-- Alertas Sweet Alert 2-->
-                <!-- Alertas para herramientas--> 
+
                 <?php 
                 
                 if(isset($_GET['sacar'])){
@@ -394,108 +394,11 @@ date_default_timezone_set('America/Santiago');
                     <?php
                 
                 }
-
                 
-
-
-                if(isset($_GET['sacar1'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Error..',
-                            text: 'No puede ingresar 0 materiales',
-                            
-                        })
-                        </script>
-                    <?php
                 
-                }
-
-                if(isset($_GET['stock1'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Error..',
-                            text: 'La cantidad solicitada no puede superar el stock disponible',
-                            
-                        })
-                        </script>
-                    <?php
                 
-                }
-
-                if(isset($_GET['eliminado1'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'success',
-                            title: 'Good..',
-                            text: 'Elemento eliminado de la lista',
-                            
-                        })
-                        </script>
-                    <?php
-                
-                }
-
-                if(isset($_GET['repetido1'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'warning',
-                            title: 'Ya existe..',
-                            text: 'El Material ya se encuentra seleccionada en el carrito',
-                            
-                        })
-                        </script>
-                    <?php
-                
-                }
-
-                if(isset($_GET['ingresado1'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'success',
-                            title: 'Añadido al carrito..',
-                            text: 'Material añadido exitosamente',
-                            
-                        })
-                        </script>
-                    <?php
-                
-                }
-
-                if(isset($_GET['vaciopersona'])){
-                    
-                    ?>
-
-                        <script>
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Error..',
-                            text: 'Seleccione departamento y solicitante',
-                            
-                        })
-                        </script>
-                    <?php
-                
-                }
-   
                 ?>
-                         
+                
                 <!-- Main Content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -519,8 +422,6 @@ date_default_timezone_set('America/Santiago');
                                         <a href="arriendo-retiro-administrar.php" style="float: right;" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver Atras</a>
                                         <br>
                                         <br>
-                                        <a href="listado-soli-ticket.php" style="float: right;" class="btn btn-success"><i class="fas fa-list"></i>&nbsp;&nbsp;Listar Solicitudes</a>
-                                        <br>
 
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             
@@ -530,21 +431,9 @@ date_default_timezone_set('America/Santiago');
                                            
                                             
                                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Materiales</a>
-
-                                                <?php 
-                                                
-                                                    $cuentaHerramientas =  (empty($_SESSION['CARRITO'])) ? 0: count($_SESSION['CARRITO']);
-                                                    $cuentaMaterial =  (empty($_SESSION['CARRITOMATERIAL'])) ? 0: count($_SESSION['CARRITOMATERIAL']);
-
-                                                    $total = $cuentaHerramientas + $cuentaMaterial;
-
-
-                                                
-                                                
-                                                ?>
                                             
                                             
-                                                <a class="nav-link" id="pills-resumen-tab" data-toggle="pill" href="#pills-resumen" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Resumen(<?php echo ($total)?>) </a>
+                                                <a class="nav-link" id="pills-resumen-tab" data-toggle="pill" href="#pills-resumen" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 900;">Resumen(<?php echo (empty($_SESSION['CARRITO'])) ? 0: count($_SESSION['CARRITO'])?>) </a>
                                         
                                         </div>
 
@@ -553,219 +442,146 @@ date_default_timezone_set('America/Santiago');
                                              
                                             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                 
-                                            <fieldset class="border p-3">
-                                                <legend class="w-auto">Herramientas Disponibles:</legend>
+                                            <br>
+                                            <?php if(!empty($mensaje)):?>
+                                                    <div class="alert alert-primary" id="mensaje"   role="alert">
+                                                        
+                                                        <strong style="color: #62ed53;font-weight:bold">Herramienta Añadida Al Carrito:</strong><br>
+                                                        <strong><?php echo $mensaje ?></strong> 
+                                                    </div>
+                                                <?php endif; ?>
+                                                
+
+                                            
+                                                
+                                                <div class="row">
+
+                                                    <?php 
+                                                    
+                                                        $queryHerramientas = "SELECT * FROM pañol_herramientas";
+                                                        $resHerramienta = mysqli_query($conexion, $queryHerramientas);                
+                                                    ?>
+
+                                                    <?php while($rowHerramienta = $resHerramienta->fetch_assoc()){
+
+
+                                                        
+                                                        $datosHerramientas = [];
+
+
+                                                        $datosHerramientas['idHerramienta'] = $rowHerramienta['idHerramienta'];
+                                                        $datosHerramientas['codHerramienta'] = $rowHerramienta['codHerramienta'];
+                                                        $datosHerramientas['nomHerramienta'] = $rowHerramienta['nomHerramienta'];
+                                                        $datosHerramientas['imagen'] = $rowHerramienta['imagen'];
+                                                        $datosHerramientas['cantHerramienta'] = $rowHerramienta['cantHerramienta'];
+                                                        $datosHerramientas['descriptHerramienta'] = $rowHerramienta['descriptHerramienta'];
+
+                                                        $idHerramienta = $datosHerramientas['idHerramienta'];
+                                                        $codHerramienta =  $datosHerramientas['codHerramienta'];
+                                                        $nomHerramienta =  $datosHerramientas['nomHerramienta'];
+                                                        $cantHerramienta =  $datosHerramientas['cantHerramienta'];
+                                                        $descriptHerramienta =  $datosHerramientas['descriptHerramienta'];
+
+
+                                                        if($cantHerramienta <= 2 ){
+
+                                                            $color = " style='color:red; font-weight:bold'";
+                                                        }
+
+                                                        if($cantHerramienta >=3 && $cantHerramienta <= 9){
+
+                                                            $color = " style='color:yellow; font-weight:bold'";
+                                                        }
+
+                                                        if($cantHerramienta >=10){
+
+                                                            $color = " style='color:#62ed53; font-weight:bold'";
+                                                        }
+
+                                                        $imagenHerramienta = $datosHerramientas['imagen'];
+                                                    
+                                                    ?>
+                                                    
+                                                        <div class="col-lg-3 col-md-2">
+                                                            <div class="card " >
+                                                                <img
+                                                                height="300px"
+                                                                src="img/<?php echo  $imagenHerramienta  ?>" 
+                                                                title="<?php echo $nomHerramienta?>"
+                                                                class="card-img-top"                             
+                                                                alt="Imagen producto">
+                                                                <div class="card-body ">          
+                                                                    <span style="text-align: center; color: orange; font-weight:bold;"><?php echo "Código. " . $codHerramienta?></span><br>
+                                                                    <span style="text-transform:uppercase;font-weight:bold;color: yellowgreen"><?php echo $nomHerramienta ?></span><br>
+                                                                    <h5  <?php echo $color?> class="card-title" style="font-weight: bold">En Stock: <?php echo $cantHerramienta; ?></h5>
+                                                                    <br>
                                                                     
-                                                <div class="table-responsive">
-                                                    <table style="font-size: 90%;" id="example3" class="table table-bordered table-hover">
-                                                        <thead class="bg-secondary">
-                                                        <tr>    
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>N°</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Imagen</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Código</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Nombre Descriptivo</center>  
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Stock Disponible</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Cantidad Arrendar</center>
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Agregar al Carrito</center> 
-                                                                   
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            
-
-                                                                <?php 
-
-                                                                $queryHerramientas = "SELECT * FROM pañol_herramientas ORDER BY idHerramienta  DESC";
-                                                                $resHerramientas = mysqli_query($conexion, $queryHerramientas);
-
-                                                                while($rowHerramientas = $resHerramientas->fetch_assoc()){
-
-                                                                    $datos = [];
-                                                                    
-                                                                    
-                                                                    $datos['idHerramienta'] = $rowHerramientas['idHerramienta'];
-                                                                    $datos['codHerramienta'] = $rowHerramientas['codHerramienta'];
-                                                                    $datos['nomHerramienta'] = $rowHerramientas['nomHerramienta'];
-                                                                    $datos['cantHerramienta'] = $rowHerramientas['cantHerramienta'];
-                                                                    $datos['imagen'] = $rowHerramientas['imagen'];
-
-                                                                    $cantHerramienta = $datos['cantHerramienta'];
-
-                                                                    if($cantHerramienta <= 2 ){
-
-                                                                        $color = " style='background-color:red; color:black; font-weight:bold;font-size: 30px; vertical-align:middle'";
-                                                                    }
-            
-                                                                    if($cantHerramienta >=3 && $cantHerramienta <= 9){
-            
-                                                                        $color = " style='background-color:yellow;color:black; font-size: 30px; font-weight:bold; vertical-align:middle'";
-                                                                    }
-            
-                                                                    if($cantHerramienta >=10){
-            
-                                                                        $color = " style='background-color:#62ed53;color:black; font-size: 30px; font-weight:bold; vertical-align:middle'";
-                                                                    }
-            
-
-
-
-                                                                    ?>
-                                                                    
-                                                                    <tr>
-                                                                        <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                            <center>
-                                                                                <?php
-
-                                                                              
-                                                                                $idHerramienta = mb_strtoupper($rowHerramientas['idHerramienta']);
-                                                                                echo $idHerramienta;
-
-                                                                                ?>
-                                                                            </center>
-                                                                        </td>
-                                                                        <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                            <center>
-                                                                                <?php
-
-                                                                              
-                                                                                $imagen = $rowHerramientas['imagen'];
-                                                                                ?>
-                                                                                    
-                                                                                    <img src="img/<?php echo $imagen ?>" alt="Imagen de herramienta" width="100px">
-
-                                                                                <?php 
-
-                                                                                ?>
-                                                                            </center>
-                                                                        </td>
-                                                                        <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $codHerramienta = mb_strtoupper($rowHerramientas['codHerramienta']);
-                                                                            echo $codHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                        </td>
-                                                                        <td nowrap="nowrap" style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $nomHerramienta = mb_strtoupper($rowHerramientas['nomHerramienta']);
-                                                                            echo $nomHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                        </td>
-                                                                        <td nowrap="nowrap" <?php echo $color ?> >
-                                                                        <center>
-                                                                            <?php
-
-                                                                            $cantHerramienta = mb_strtoupper($rowHerramientas['cantHerramienta']);
-                                                                            echo $cantHerramienta;
-
-                                                                            ?>
-                                                                        </center>
-                                                                        </td>
-                                                                        <td style="vertical-align:middle;font-weight:bold">
-                                                                        <center>
-                                                                            <?php
-
-                                                                                ?> 
-                                                                                    
-                                                                                <form method="POST" id="formdata">
-
-                                                                                    <div class="form-group">
-                                                                                        <label for="" class="label-control" required>Cantidad a reservar:</label>
-                                                                                        <input type="number" class=" form-control" name="sacar">
+                                                        
+                                                                    <br>
+                                                                    <button type="button" style="cursor:zoom-in;" class="btn btn-xs  btn-info" id="descripcion" data-toggle="modal" data-target="#idHerramienta<?php echo $idHerramienta ?>">Leer Descripción</button> 
+                                                                    <br>
+                                                                    <div class="modal fade" id="idHerramienta<?php echo $idHerramienta ?>" name="idHerramienta<?php echo $idHerramienta ?>" tabindex="-1" role="dialog" aria-labelledby="EjemploModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="EjemploModalLabel">Especificaciones de la herramienta</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">×</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div style="text-align:left;" class="form-group">
+                                                                                        
                                                                                     </div>
+                                                                                        <p><?php echo $descriptHerramienta;?></p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Ya he leído esto!</button>
+                                                                                    
 
-                                                                               <?php      
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                                                                            ?>
-                                                                        </center>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;font-weight:bold">
-                                                                            <center>
-                                                                                <?php 
+                                                                    <br>
+                                                                    
+                                                                
 
-                                                                                    ?>
-                                                                                        
-                                                                           
-                                                                                            <br>
-                                                                                            <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
-                                                                                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $codHerramienta?>">
-                                                                                            <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
-                                                                                            <input type="hidden" name="stock" id="stock" value="<?php echo $cantHerramienta ?>">
-                                                                                            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
-                                                                                        
+                                                        
+                                                                    
+                                                                        <form method="POST" id="formdata">
+                                                                            
+                                                                            <div class="form-group">
+                                                                                <label for="" class="label-control" required>Cantidad a reservar:</label>
+                                                                                <input type="number" class=" form-control" name="sacar">
+                                                                            </div>
+                                                                            
+                                                                            <br>
+                                                                            <input type="hidden" name="id" id="id" value="<?php echo $idHerramienta?>">
+                                                                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $codHerramienta?>">
+                                                                            <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomHerramienta?>">
+                                                                            <input type="hidden" name="stock" id="stock" value="<?php echo $cantHerramienta ?>">
+                                                                            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
+                                                                        
 
-                                                                                            <button name="btnAccion" value="Agregar"  id="añadir"  class="btn btn-success"><strong>Añadir al carrito</strong> </button>
-                                                                                        </form>
+                                                                            <button name="btnAccion" value="Agregar"  id="añadir"  class="btn btn-success"><strong>Añadir al carrito</strong> </button>
+                                                                        </form>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- .col-3 -->
 
-                                                                                    <?php
+                                                    <?php }?>
+                                                
+                                                </div> <!-- .row--> 
 
-                                                                                
-                                                                                ?>
-                                                                            </center>
-                                                                        </td>
-                                                                    </tr>
+                                    
+                                                
+                                            
 
-                                                                    <?php
-
-
-
-                                                                }
-
-
-                                                                ?>
-
-                                                        </tbody>
-                                                        <tfoot class="bg-secondary">
-                                                            <tr>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>N°</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Imagen</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Código</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Nombre Descriptivo</center>  
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Stock Disponible</center> 
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Cantidad Arrendar</center>
-                                                                </th>
-                                                                <th style="vertical-align: middle;">
-                                                                    <center>Agregar al Carrito</center> 
-                                                                </th>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </fieldset>
-                                                                             
+                                            
+                                                                
                                             </div>
                                             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
@@ -773,7 +589,7 @@ date_default_timezone_set('America/Santiago');
                                                 <legend class="w-auto">Materiales Disponibles:</legend>
                                                                     
                                                 <div class="table-responsive">
-                                                    <table style="font-size: 90%;" id="example2" class="table table-bordered table-hover">
+                                                    <table style="font-size: 90%;" id="example3" class="table table-bordered table-hover">
                                                         <thead class="bg-secondary">
                                                         <tr>    
                                                                 <th style="vertical-align: middle;">
@@ -821,17 +637,17 @@ date_default_timezone_set('America/Santiago');
 
                                                                     if($cantMaterial <= 2 ){
 
-                                                                        $color = " style='background-color:red;color: black; font-weight:bold;font-size: 30px; vertical-align:middle'";
+                                                                        $color = " style='background-color:red; font-weight:bold;font-size: 30px; vertical-align:middle'";
                                                                     }
             
                                                                     if($cantMaterial >=3 && $cantMaterial <= 9){
             
-                                                                        $color = " style='background-color:yellow;color: black; font-weight:bold;font-size: 30px; vertical-align:middle'";
+                                                                        $color = " style='background-color:yellow;font-size: 30px; font-weight:bold; vertical-align:middle'";
                                                                     }
             
                                                                     if($cantMaterial >=10){
             
-                                                                        $color = " style='background-color:#62ed53;color: black;font-size: 30px; font-weight:bold; vertical-align:middle'";
+                                                                        $color = " style='background-color:#62ed53;font-size: 30px; font-weight:bold; vertical-align:middle'";
                                                                     }
             
 
@@ -902,22 +718,14 @@ date_default_timezone_set('America/Santiago');
 
                                                                                     ?>
                                                                                         
-                                                                                        <form method="POST" id="formdata">
-                                                                            
-                                                                                            <div class="form-group">
-                                                                                                <label for="" class="label-control" required>Cantidad a reservar:</label>
-                                                                                                <input type="number" class=" form-control" name="sacar">
-                                                                                            </div>
-                                                                                            
-                                                                                            <br>
-                                                                                            <input type="hidden" name="id" id="id" value="<?php echo $idMaterial?>">
-                                                                                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $codMaterial?>">
-                                                                                            <input type="hidden" name="nombre" id="nombre" value="<?php echo $nomMaterial?>">
-                                                                                            <input type="hidden" name="stock" id="stock" value="<?php echo $cantMaterial ?>">
-                                                                                            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo 1?>">
-                                                                                        
+                                                                                        <form action="carritoMateriales.php" class="form-group" method="POST" >
 
-                                                                                            <button name="btnAccion" value="AgregarMaterial"  id="añadir"  class="btn btn-success"><strong>Añadir al carrito</strong> </button>
+                                                                                            
+                                                                                            <input type="hidden" name="idHerramienta" value="<?php echo $idHerramienta ;?>">
+                                                                                            <button type="submit" onclick="confirmar(event, <?php echo $idHerramienta?>)" id="inputMozi" class="btn  btn-success"><i class="fas fa-plus"></i></button>
+
+                                                                                           
+                                                                                        
                                                                                         </form>
 
                                                                                     <?php
@@ -1127,7 +935,6 @@ date_default_timezone_set('America/Santiago');
 
                                                                             
                                                                                 <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
-                                                
 
                                                                                 <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
                                                                             
@@ -1160,7 +967,7 @@ date_default_timezone_set('America/Santiago');
                                                         
                                                         
 
-                                                        <?php  if(!empty($_SESSION['CARRITOMATERIAL'])){?>
+                                                        <?php  if(!empty($_SESSION['CARRITO'])){?>
 
                                                         
 
@@ -1174,30 +981,30 @@ date_default_timezone_set('America/Santiago');
                                                                     <th scope="col" class="text-center">ACCIONES</th>
                                                                 </tr>
                                                             </thead>
-                                                            <?php foreach($_SESSION['CARRITOMATERIAL'] AS $indice=>$material){  
+                                                            <?php foreach($_SESSION['CARRITO'] AS $indice=>$herramienta){  
                                                                 
-                                                                if(!isset($numMaterial)){
-                                                                    $numMaterial = 0;
+                                                                if(!isset($num)){
+                                                                    $num = 0;
                                                                 }else{
-                                                                    $numMaterial = $numMaterial;
+                                                                    $num = $num;
                                                                 }
 
-                                                                $numMaterial++;
+                                                                $num++;
                                                                 
                                                             ?>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="row"  class="text-center"><?php echo $numMaterial?></th>
-                                                                        <td class="text-center"><?php echo $material['codigo']?></td>
-                                                                        <td class="text-center"><?php echo $material['nombre']?></td>
-                                                                        <td class="text-center"><?php echo $material['sacar']?></td>
+                                                                        <th scope="row"  class="text-center"><?php echo $num?></th>
+                                                                        <td class="text-center"><?php echo $herramienta['codigo']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['nombre']?></td>
+                                                                        <td class="text-center"><?php echo $herramienta['sacar']?></td>
                                                                         
                                                                         <form action="" method="POST">
 
                                                                             
-                                                                                <input type="hidden" required name="id" id="id" value="<?php echo $material['id']?>">
+                                                                                <input type="hidden" required name="id" id="id" value="<?php echo $herramienta['id']?>">
 
-                                                                                <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="EliminarMaterial" type="submit">Eliminar</button></td>
+                                                                                <td class="text-center"><button class="btn btn-danger" name="btnAccion" value="Eliminar" type="submit">Eliminar</button></td>
                                                                             
                                                                         </form>
                                                                             
@@ -1232,10 +1039,6 @@ date_default_timezone_set('America/Santiago');
                                                 <form action="carritoHerramientas.php" method="POST">
                                                     <div class="form-group">
                                                         
-                                                        <input type="hidden" required name="depa" id="depa" value="">
-                                                        <input type="hidden" required name="personal" id="personal" value="">
-
-
                                                         <input type="submit" class="btn btn-block btn-success" name="btnAccion" value="Guardar" style="font-weight: bold;" />
                                                     </div>
                                                 </form>
